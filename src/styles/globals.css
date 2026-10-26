@@ -1,50 +1,40 @@
 @import 'tailwindcss';
+@import '@fontsource-variable/outfit';
+@import '@fontsource-variable/dm-sans';
 
 @theme inline {
+  --font-display: 'Outfit Variable', 'Outfit', system-ui, sans-serif;
+  --font-sans: 'DM Sans Variable', 'DM Sans', system-ui, sans-serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
+  --color-netflix-black: #141414;
+  --color-netflix-red: #0071eb;
+  --color-brand-blue: #0071eb;
+  --color-netflix-gray: #808080;
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
   --color-border: var(--border);
-  --color-input: var(--input);
   --color-ring: var(--ring);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --color-brand: #0071eb;
+  --color-match: #22c55e;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(0.12 0.02 40);
-  --foreground: oklch(0.98 0.01 80);
-  --card: oklch(0.16 0.02 40);
-  --card-foreground: oklch(0.98 0.01 80);
-  --popover: oklch(0.16 0.02 40);
-  --popover-foreground: oklch(0.98 0.01 80);
-  --primary: oklch(0.72 0.14 55);
-  --primary-foreground: oklch(0.18 0.03 40);
-  --secondary: oklch(0.22 0.02 40);
-  --secondary-foreground: oklch(0.96 0.01 80);
-  --muted: oklch(0.22 0.02 40);
-  --muted-foreground: oklch(0.7 0.02 60);
-  --accent: oklch(0.26 0.04 45);
-  --accent-foreground: oklch(0.98 0.01 80);
-  --destructive: oklch(0.6 0.2 25);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.72 0.14 55);
+  --background: #141414;
+  --foreground: #ffffff;
+  --primary: #0071eb;
+  --primary-foreground: #ffffff;
+  --secondary: rgba(109, 109, 110, 0.7);
+  --secondary-foreground: #ffffff;
+  --muted: #2f2f2f;
+  --muted-foreground: #b3b3b3;
+  --border: rgba(255, 255, 255, 0.2);
+  --ring: rgba(255, 255, 255, 0.4);
 }
 
 @layer base {
@@ -52,22 +42,61 @@
     @apply border-border;
   }
 
-  html {
-    color-scheme: dark;
-  }
-
+  html,
   body {
-    @apply min-h-dvh bg-background text-foreground antialiased;
     margin: 0;
-    font-family:
-      'Segoe UI',
-      'Noto Sans Thai',
-      system-ui,
-      -apple-system,
-      sans-serif;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #141414;
+    color: #fff;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
   }
 
   #root {
-    min-height: 100dvh;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 3px;
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply px-[10px] text-[14px] text-white transition-colors hover:text-[#e5e5e5];
+  }
+
+  .dropdown-link {
+    @apply block px-[10px] py-[5px] text-[13px] text-[#b3b3b3] hover:underline;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }

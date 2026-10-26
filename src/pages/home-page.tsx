@@ -1,84 +1,67 @@
+import { useState } from 'react'
 import { Icon } from '@/components/icons/icon'
-import { Button } from '@/components/ui/button'
-
-const rails = [
-  {
-    title: 'Continue reading',
-    items: ['Midnight Chat', 'Rainy Roof', 'Glass Garden'],
-  },
-  {
-    title: 'Trending scroll series',
-    items: ['Blade Line', 'Soft Orbit', 'Harbor Ghost'],
-  },
-  {
-    title: 'Chat novels',
-    items: ['Office 12F', 'Last Train', 'Paper Hearts'],
-  },
-]
+import { SeriesModal } from '@/components/netflix/series-modal'
+import { SeriesRow } from '@/components/netflix/series-row'
+import { catalog, featuredSeries, railFor, type SeriesCard } from '@/data/catalog'
 
 export function HomePage() {
-  return (
-    <div className="min-h-dvh bg-background text-foreground">
-      <header className="fixed inset-x-0 top-0 z-20 flex items-center justify-between px-6 py-4 bg-gradient-to-b from-background/90 to-transparent">
-        <div className="flex items-center gap-2">
-          <Icon icon="lucide:book-open" width={24} height={24} className="text-primary" />
-          <span className="text-xl font-semibold tracking-tight">Liblo</span>
-        </div>
-        <nav className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" aria-label="Search">
-            <Icon icon="lucide:search" />
-          </Button>
-          <Button variant="secondary" size="sm">
-            <Icon icon="lucide:pen-line" width={16} height={16} />
-            Studio
-          </Button>
-        </nav>
-      </header>
+  const [selected, setSelected] = useState<SeriesCard | null>(null)
 
-      <section className="relative flex min-h-[78dvh] items-end overflow-hidden px-6 pb-16 pt-28">
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,oklch(0.45_0.12_45/_0.45),transparent_55%),linear-gradient(180deg,oklch(0.2_0.03_40),oklch(0.12_0.02_40))]"
+  return (
+    <div className="relative min-h-screen overflow-x-hidden bg-netflix-black">
+      {/* Hero — deepanik/Netflix proportions */}
+      <div className="relative h-[56.25vw] max-h-[95vh] min-h-[400px] w-full">
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-transparent via-netflix-black/60 to-netflix-black" />
+        <img
+          src={featuredSeries.coverUrl}
+          alt=""
+          className="h-full w-full object-cover object-[center_20%]"
         />
-        <div className="relative z-10 max-w-xl space-y-4">
-          <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">Featured</p>
-          <h1 className="text-4xl font-semibold leading-tight sm:text-5xl">Stories that scroll, chat, and stay with you</h1>
-          <p className="max-w-md text-muted-foreground">
-            Read vertical comics, Joylada-style chat novels, and e-books in one place. Write and publish from the same account.
+
+        <div className="absolute top-[35%] left-4 z-20 max-w-[80%] sm:top-[30%] sm:max-w-[70%] md:left-[60px] md:max-w-[50%]">
+          <h1 className="mb-3 font-display text-3xl font-bold text-white sm:text-4xl md:mb-4 md:text-5xl lg:text-6xl">
+            {featuredSeries.title}
+          </h1>
+          <div className="mb-3 flex flex-wrap items-center gap-2 text-sm text-white/80">
+            <span>
+              {featuredSeries.year} · {featuredSeries.seasons}
+            </span>
+            <span className="border border-white/40 px-1 text-xs">{featuredSeries.quality}</span>
+          </div>
+          <p className="mb-4 line-clamp-3 text-sm text-white sm:text-base md:mb-6 md:line-clamp-4 md:text-lg">
+            {featuredSeries.synopsis}
           </p>
-          <div className="flex flex-wrap gap-3 pt-2">
-            <Button size="lg">
-              <Icon icon="lucide:play" />
-              Start reading
-            </Button>
-            <Button size="lg" variant="outline">
-              Browse catalog
-            </Button>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              className="flex min-w-[100px] cursor-pointer items-center justify-center rounded bg-white px-4 py-1.5 font-semibold text-black transition hover:bg-white/80 sm:px-6 sm:py-2 md:px-8"
+            >
+              <Icon icon="lucide:play" width={20} height={20} className="mr-1 sm:mr-2" />
+              <span>Play</span>
+            </button>
+            <button
+              type="button"
+              className="flex min-w-[130px] cursor-pointer items-center justify-center rounded bg-gray-500/70 px-4 py-1.5 font-semibold text-white transition hover:bg-gray-500/50 sm:px-6 sm:py-2 md:px-8"
+              onClick={() => setSelected(featuredSeries)}
+            >
+              <Icon icon="lucide:info" width={20} height={20} className="mr-1 sm:mr-2" />
+              <span>More Info</span>
+            </button>
           </div>
         </div>
-      </section>
+      </div>
 
-      <main className="space-y-10 px-6 pb-16">
-        {rails.map((rail) => (
-          <section key={rail.title} className="space-y-4">
-            <h2 className="text-lg font-medium">{rail.title}</h2>
-            <div className="flex gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {rail.items.map((title) => (
-                <article
-                  key={title}
-                  className="group w-36 shrink-0 cursor-pointer sm:w-40"
-                >
-                  <div className="aspect-[2/3] overflow-hidden rounded-md bg-card ring-1 ring-border transition duration-300 group-hover:scale-[1.03]">
-                    <div className="flex h-full items-end bg-gradient-to-t from-black/70 to-transparent p-3">
-                      <span className="text-sm font-medium leading-snug">{title}</span>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-        ))}
-      </main>
+      {/* Rows overlap hero like deepanik */}
+      <div className="relative z-20 -mt-32 md:-mt-40">
+        <SeriesRow title="Trending Now" items={railFor('trending')} onSeriesClick={setSelected} />
+        <SeriesRow title="Romance" items={railFor('romance')} onSeriesClick={setSelected} />
+        <SeriesRow title="Vertical Scroll" items={railFor('scroll')} onSeriesClick={setSelected} />
+        <SeriesRow title="Chat Novels" items={railFor('chat')} onSeriesClick={setSelected} />
+        <SeriesRow title="E-books" items={railFor('ebook')} onSeriesClick={setSelected} />
+        <SeriesRow title="All Titles" items={catalog} onSeriesClick={setSelected} />
+      </div>
+
+      {selected ? <SeriesModal series={selected} onClose={() => setSelected(null)} /> : null}
     </div>
   )
 }
