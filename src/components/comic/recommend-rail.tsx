@@ -1,12 +1,12 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Icon } from '@/components/icons/icon'
-import type { M1Title } from '@/data/manga-one-en'
+import type { ComicTitle } from '@/data/comic'
 
 type Props = {
   title: string
   watermark: string
-  items: M1Title[]
+  items: ComicTitle[]
   light?: boolean
 }
 

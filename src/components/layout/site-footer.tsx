@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { LibloLogo } from '@/components/brand/liblo-logo'
-import { navLinks } from '@/data/manga-one-en'
+import { navLinks } from '@/data/nav'
 
 export function SiteFooter() {
   return (

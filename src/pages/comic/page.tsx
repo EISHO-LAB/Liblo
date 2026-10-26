@@ -1,16 +1,18 @@
-import { HeroCarousel } from '@/components/m1/hero-carousel'
-import { DayRanking } from '@/components/m1/day-ranking'
-import { RecommendRail } from '@/components/m1/recommend-rail'
-import { SiteFooter } from '@/components/m1/site-footer'
-import { TodayUpdates } from '@/components/m1/today-updates'
+import {
+  DayRanking,
+  HeroCarousel,
+  RecommendRail,
+  TodayUpdates,
+} from '@/components/comic'
+import { SiteFooter } from '@/components/layout'
 import {
   comicsShelf,
   oneShots,
   originals,
   recommended,
-} from '@/data/manga-one-en'
+} from '@/data/comic'
 
-/** Comics product tab — Manga One–style home for vertical comics. */
+/** Comics product tab — vertical comics home. */
 export function ComicPage() {
   return (
     <div className="min-h-screen bg-[#111]">

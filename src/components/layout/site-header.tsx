@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { LibloLogo } from '@/components/brand/liblo-logo'
 import { Icon } from '@/components/icons/icon'
-import { navLinks } from '@/data/manga-one-en'
+import { navLinks } from '@/data/nav'
 import { useAuth } from '@/lib/auth'
 import { cn } from '@/lib/utils'
 

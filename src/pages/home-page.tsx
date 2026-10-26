@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Icon } from '@/components/icons/icon'
-import { SiteFooter } from '@/components/m1/site-footer'
-import { catalog as m1Catalog, heroBanners } from '@/data/manga-one-en'
+import { SiteFooter } from '@/components/layout'
+import { catalog as comicCatalog, heroBanners } from '@/data/comic'
 import { railFor } from '@/data/catalog'
 import { cn } from '@/lib/utils'
 
@@ -12,7 +12,7 @@ const PRODUCTS = [
     href: '/comic',
     blurb: 'Vertical scroll stories — binge anytime.',
     icon: 'lucide:book-image',
-    cover: m1Catalog[0]?.cover ?? '/m1/portrait/p01.webp',
+    cover: comicCatalog[0]?.cover ?? '/m1/portrait/p01.webp',
     tone: 'from-[#F6334F]/90 to-[#111]/40',
   },
   {
@@ -30,7 +30,7 @@ const PRODUCTS = [
     href: '/ebooks',
     blurb: 'Long-form reading for deeper worlds.',
     icon: 'lucide:book-open',
-    cover: railFor('ebook')[0]?.coverUrl ?? m1Catalog[2]?.cover ?? '/m1/portrait/p03.webp',
+    cover: railFor('ebook')[0]?.coverUrl ?? comicCatalog[2]?.cover ?? '/m1/portrait/p03.webp',
     tone: 'from-[#111]/20 to-[#111]/80',
   },
   {
@@ -39,7 +39,7 @@ const PRODUCTS = [
     href: '/oneshots',
     blurb: 'Complete in one sitting.',
     icon: 'lucide:sparkles',
-    cover: m1Catalog[5]?.cover ?? '/m1/portrait/p06.webp',
+    cover: comicCatalog[5]?.cover ?? '/m1/portrait/p06.webp',
     tone: 'from-[#e8a838]/85 to-[#111]/50',
   },
 ] as const
@@ -142,7 +142,7 @@ export function HomePage() {
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-6">
-            {m1Catalog.slice(0, 6).map((t) => (
+            {comicCatalog.slice(0, 6).map((t) => (
               <Link key={t.id} to="/comic" className="min-w-0">
                 <div className="aspect-[3/4] overflow-hidden rounded-lg bg-[#2a2a2a]">
                   <img src={t.cover} alt="" className="h-full w-full object-cover object-top" />

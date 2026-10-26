@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Icon } from '@/components/icons/icon'
-import { heroBanners } from '@/data/manga-one-en'
+import { heroBanners } from '@/data/comic'
 import { cn } from '@/lib/utils'
 
 const N = heroBanners.length

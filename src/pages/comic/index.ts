@@ -1,0 +1,1 @@
+export { ComicPage } from './page'

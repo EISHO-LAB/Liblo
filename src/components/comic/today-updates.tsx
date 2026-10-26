@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Icon } from '@/components/icons/icon'
-import { catalog, days, todayKey } from '@/data/manga-one-en'
+import { catalog, days, todayKey } from '@/data/comic'
 import { cn } from '@/lib/utils'
 
 export function TodayUpdates() {

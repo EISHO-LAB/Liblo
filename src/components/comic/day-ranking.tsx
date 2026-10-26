@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
+import { ComicRankBadge } from '@/components/comic/rank-badge'
 import { Icon } from '@/components/icons/icon'
-import { rankingPool } from '@/data/manga-one-en'
+import { rankingPool } from '@/data/comic'
 import { cn } from '@/lib/utils'
 
 const ITEMS = rankingPool.slice(0, 7)
@@ -59,13 +60,7 @@ export function DayRanking({ className }: { className?: string }) {
                     {promo ? <PromoBadge tone={promo.tone} label={promo.label} /> : null}
                   </div>
 
-                  {/* Half on cover, half over title — does not push title down */}
-                  <span
-                    aria-hidden
-                    className="rank-num pointer-events-none absolute bottom-0 -left-2.5 z-10 translate-y-[16%] font-display"
-                  >
-                    {rank}
-                  </span>
+                  <ComicRankBadge rank={rank} />
                 </div>
 
                 <p className="mt-3 truncate text-[11px] font-bold leading-snug text-[#333] sm:text-[12px]">

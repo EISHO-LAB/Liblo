@@ -1,6 +1,6 @@
-/** English clone catalog — images from local manga-one.com scrape. */
+/** Comics product catalog — covers from local manga-one scrape + Liblo art. */
 
-export type M1Title = {
+export type ComicTitle = {
   id: string
   title: string
   subtitle: string
@@ -11,9 +11,10 @@ export type M1Title = {
   isOriginal?: boolean
 }
 
-/** Portrait Japanese comic covers (cropped from manga-one scrape + Liblo art). */
+/** @deprecated Prefer ComicTitle */
+export type M1Title = ComicTitle
+
 const c = (n: number) => `/m1/portrait/p${String(n).padStart(2, '0')}.webp`
-/** Wide hero / banner art */
 const r = (n: number) => `/m1/ranking-thumbs/r${String(n).padStart(2, '0')}.webp`
 
 export const heroBanners = [
@@ -27,7 +28,7 @@ export const heroBanners = [
   { id: 'h8', title: 'Original Series', image: r(5), href: '#' },
 ]
 
-const titles: Omit<M1Title, 'id'>[] = [
+const titles: Omit<ComicTitle, 'id'>[] = [
   { title: 'Midnight Signal', subtitle: 'A late-night chat becomes destiny', cover: c(1), chapter: 'Ep. 42', views: 11949, isUp: true, isOriginal: true },
   { title: 'Rainy Roof', subtitle: 'Secrets on a wet city skyline', cover: c(2), chapter: 'Ep. 18', views: 9495, isUp: true },
   { title: 'Glass Garden', subtitle: 'Crystal blooms that never sleep', cover: c(3), chapter: 'Ep. 7', views: 7597, isUp: true, isOriginal: true },
@@ -60,29 +61,18 @@ const titles: Omit<M1Title, 'id'>[] = [
   { title: 'Pixel Heart', subtitle: 'Game world, real feelings', cover: c(30), chapter: 'Ep. 41', views: 443 },
 ]
 
-export const catalog: M1Title[] = titles.map((t, i) => ({
+export const catalog: ComicTitle[] = titles.map((t, i) => ({
   ...t,
   id: `t${i + 1}`,
   cover: t.cover,
 }))
 
 export const todayUpdates = catalog.filter((t) => t.isUp).slice(0, 10)
-/** Top zone — 7 portrait Japanese comic covers */
 export const rankingPool = catalog.slice(0, 7)
 export const recommended = catalog.slice(0, 12)
 export const originals = catalog.filter((t) => t.isOriginal)
 export const oneShots = catalog.slice(15, 25)
 export const comicsShelf = catalog.slice(5, 17)
-
-/** Site-wide product nav — LIBLO has more than comics. */
-export const navLinks = [
-  { label: 'Comics', href: '/comic' },
-  { label: 'Chat novels', href: '/chat' },
-  { label: 'E-books', href: '/ebooks' },
-  { label: 'One-shots', href: '/oneshots' },
-  { label: 'Title list', href: '/titles' },
-  { label: 'Buy coins', href: '/coins' },
-]
 
 export const days = [
   { key: 'mon', label: 'Mon' },
