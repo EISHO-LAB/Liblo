@@ -1,124 +1,85 @@
-import { useMemo, useState } from 'react'
-import { Icon } from '@/components/icons/icon'
-import { RankingRail } from '@/components/manga/ranking-rail'
-import { TitleRail } from '@/components/manga/title-rail'
-import { SeriesModal } from '@/components/netflix/series-modal'
-import { catalog, railFor, type SeriesCard } from '@/data/catalog'
-import { cn } from '@/lib/utils'
+import { HeroCarousel } from '@/components/m1/hero-carousel'
+import { DayRanking } from '@/components/m1/day-ranking'
+import { RecommendRail } from '@/components/m1/recommend-rail'
+import { SiteFooter } from '@/components/m1/site-footer'
+import { TodayUpdates } from '@/components/m1/today-updates'
+import {
+  comicsShelf,
+  oneShots,
+  originals,
+  recommended,
+} from '@/data/manga-one-en'
 
-const genres = ['All', 'Romance', 'Drama', 'Fantasy', 'Action', 'Thriller', 'Slice of Life'] as const
-
+/** Comics product tab — Manga One–style home for vertical comics. */
 export function ComicPage() {
-  const comics = railFor('scroll')
-  const featured = comics[0] ?? catalog[1]!
-  const [genre, setGenre] = useState<(typeof genres)[number]>('All')
-  const [selected, setSelected] = useState<SeriesCard | null>(null)
-
-  const filtered = useMemo(() => {
-    if (genre === 'All') return comics
-    return comics.filter((c) => c.genre === genre || c.tags.includes(genre))
-  }, [comics, genre])
-
   return (
-    <div className="min-h-screen bg-[#111] pb-20 pt-header">
-      <section className="relative mx-auto max-w-6xl overflow-hidden px-4 py-6 md:px-6">
-        <div className="relative grid overflow-hidden rounded-2xl ring-1 ring-white/10 md:grid-cols-[240px_1fr]">
-          <button
-            type="button"
-            onClick={() => setSelected(featured)}
-            className="group relative aspect-[2/3] cursor-pointer overflow-hidden md:aspect-auto md:min-h-[320px]"
-          >
-            <img
-              src={featured.coverUrl}
-              alt=""
-              className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-            />
-          </button>
-          <div className="relative flex flex-col justify-center bg-gradient-to-br from-[#152238] via-[#111] to-[#0b1220] p-6 md:p-10">
-            <p className="mb-2 text-xs font-bold tracking-[0.2em] text-brand-bright uppercase">
-              Comics · Webtoon
-            </p>
-            <h1 className="font-display text-3xl font-bold text-white md:text-4xl">
-              {featured.title}
-            </h1>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/70 md:text-base">
-              {featured.synopsis}
-            </p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              <button
-                type="button"
-                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(26,122,255,0.35)] hover:bg-brand-bright"
-              >
-                <Icon icon="lucide:book-open" width={16} height={16} />
-                Read now
-              </button>
-              <button
-                type="button"
-                onClick={() => setSelected(featured)}
-                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/16"
-              >
-                Details
-              </button>
-            </div>
-          </div>
+    <div className="min-h-screen bg-[#111]">
+      <div className="flex h-dvh flex-col overflow-hidden">
+        <div className="m1-dot-bg shrink-0">
+          <HeroCarousel />
         </div>
-      </section>
-
-      <RankingRail title="Comic ranking" items={comics} onSelect={setSelected} />
-
-      <section className="mx-auto max-w-6xl px-4 md:px-6">
-        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="section-title">Browse comics</h2>
-            <p className="mt-1 text-xs text-white/45">Vertical-scroll stories — binge anytime.</p>
-          </div>
-          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-            {genres.map((g) => (
-              <button
-                key={g}
-                type="button"
-                onClick={() => setGenre(g)}
-                className={cn(
-                  'shrink-0 cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-semibold transition',
-                  genre === g
-                    ? 'bg-brand text-white'
-                    : 'bg-white/8 text-white/65 hover:bg-white/14 hover:text-white',
-                )}
-              >
-                {g}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
-          {filtered.map((series) => (
-            <button
-              key={series.id}
-              type="button"
-              onClick={() => setSelected(series)}
-              className="group cursor-pointer text-left"
-            >
-              <div className="cover-card aspect-[2/3]">
-                <img
-                  src={series.coverUrl}
-                  alt=""
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                />
-              </div>
-              <p className="mt-2 line-clamp-2 text-[12px] font-medium text-white/90 group-hover:text-brand-bright">
-                {series.title}
-              </p>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      <div className="mt-10">
-        <TitleRail title="Also popular" items={railFor('trending')} onSelect={setSelected} />
+        <DayRanking className="flex min-h-0 flex-1 flex-col" />
       </div>
 
-      {selected ? <SeriesModal series={selected} onClose={() => setSelected(null)} /> : null}
+      <TodayUpdates />
+
+      <RecommendRail
+        title="Recommended titles"
+        watermark="RECOMMEND"
+        items={recommended}
+        light
+      />
+
+      <div className="m1-dot-bg">
+        <RecommendRail title="LIBLO originals" watermark="ORIGINAL" items={originals} />
+      </div>
+
+      <RecommendRail title="One-shots" watermark="ONESHOT" items={oneShots} light />
+
+      <div className="m1-dot-bg pb-4">
+        <RecommendRail title="Comics" watermark="COMICS" items={comicsShelf} />
+
+        <section className="relative mx-auto mt-10 max-w-[1200px] overflow-hidden px-4 md:px-6">
+          <div className="relative flex flex-col items-center gap-4 overflow-hidden rounded-2xl bg-[#1a1a1a] px-6 py-10 md:flex-row md:justify-between">
+            <img
+              src="/m1/assets/home/movie-section/rectangle-left-sp.svg"
+              alt=""
+              className="pointer-events-none absolute top-0 left-0 h-full opacity-80"
+            />
+            <img
+              src="/m1/assets/home/movie-section/rectangle-right-sp.svg"
+              alt=""
+              className="pointer-events-none absolute top-0 right-0 h-full opacity-80"
+            />
+            <div className="relative z-10 max-w-md">
+              <p className="text-sm font-bold tracking-wide text-m1-soft uppercase">Featured PR</p>
+              <h2 className="mt-1 font-display text-2xl font-extrabold text-white md:text-3xl">
+                LIBLO pick titles — trailer zone
+              </h2>
+              <p className="mt-2 text-sm text-white/60">
+                Highlighted series promo clips. Swap in your own videos when you adapt the catalog.
+              </p>
+            </div>
+            <img
+              src="/m1/assets/home/movie-section/cerberus-kun.png"
+              alt=""
+              className="relative z-10 h-36 w-auto md:h-44"
+            />
+          </div>
+        </section>
+
+        <section className="mx-auto mt-10 flex max-w-[1200px] flex-wrap items-end justify-center gap-8 px-4 py-8 md:px-6">
+          <img
+            src="/m1/assets/home/content-section/ninki-manga-no.png"
+            alt="Popular manga"
+            className="h-16 w-auto opacity-90"
+          />
+          <img src="/m1/assets/home/content-section/choitashi.png" alt="" className="h-20 w-auto" />
+          <img src="/m1/assets/character/cerberus-kun.webp" alt="" className="h-24 w-auto" />
+        </section>
+      </div>
+
+      <SiteFooter />
     </div>
   )
 }

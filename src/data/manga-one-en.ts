@@ -74,13 +74,14 @@ export const originals = catalog.filter((t) => t.isOriginal)
 export const oneShots = catalog.slice(15, 25)
 export const comicsShelf = catalog.slice(5, 17)
 
+/** Site-wide product nav — LIBLO has more than comics. */
 export const navLinks = [
-  { label: 'Title list', href: '/titles' },
-  { label: 'Fair titles', href: '/fair' },
-  { label: 'One-shots', href: '/oneshots' },
   { label: 'Comics', href: '/comic' },
+  { label: 'Chat novels', href: '/chat' },
+  { label: 'E-books', href: '/ebooks' },
+  { label: 'One-shots', href: '/oneshots' },
+  { label: 'Title list', href: '/titles' },
   { label: 'Buy coins', href: '/coins' },
-  { label: 'Submit work', href: '/writer', external: true },
 ]
 
 export const days = [
