@@ -11,7 +11,9 @@ export type M1Title = {
   isOriginal?: boolean
 }
 
-const c = (n: number) => `/m1/covers/c${String(n).padStart(2, '0')}.webp`
+/** Portrait Japanese comic covers (cropped from manga-one scrape + Liblo art). */
+const c = (n: number) => `/m1/portrait/p${String(n).padStart(2, '0')}.webp`
+/** Wide hero / banner art */
 const r = (n: number) => `/m1/ranking-thumbs/r${String(n).padStart(2, '0')}.webp`
 
 export const heroBanners = [
@@ -65,10 +67,8 @@ export const catalog: M1Title[] = titles.map((t, i) => ({
 }))
 
 export const todayUpdates = catalog.filter((t) => t.isUp).slice(0, 10)
-export const rankingPool = catalog.slice(0, 15).map((t, i) => ({
-  ...t,
-  cover: i < 20 ? r((i % 20) + 1) : t.cover,
-}))
+/** Top zone — 7 portrait Japanese comic covers */
+export const rankingPool = catalog.slice(0, 7)
 export const recommended = catalog.slice(0, 12)
 export const originals = catalog.filter((t) => t.isOriginal)
 export const oneShots = catalog.slice(15, 25)

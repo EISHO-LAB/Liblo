@@ -13,18 +13,16 @@ import {
 export function HomePage() {
   return (
     <div className="min-h-screen bg-[#111]">
-      {/* Dark top — hero slider */}
-      <div className="m1-dot-bg pb-6">
+      {/* 1) Slider */}
+      <div className="m1-dot-bg">
         <HeroCarousel />
       </div>
 
-      {/* White — today’s updates + UPDATE watermark */}
-      <TodayUpdates />
+      {/* 2) Rank */}
+      <DayRanking />
 
-      {/* Dark — ranking */}
-      <div className="m1-dot-bg pt-2 pb-4">
-        <DayRanking />
-      </div>
+      {/* 3) New updates + day filter */}
+      <TodayUpdates />
 
       <RecommendRail
         title="Recommended titles"
