@@ -1,6 +1,8 @@
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { AutoOverlayScrollbars } from '@/components/auto-overlay-scrollbars'
 import { GuestOnly, RequireAuth } from '@/components/auth/require-auth'
 import { SiteHeader } from '@/components/m1/site-header'
+import { SiteScrollbar } from '@/components/site-scrollbar'
 import { AuthProvider } from '@/lib/auth'
 import { AccountPage } from '@/pages/account-page'
 import { BrowsePage } from '@/pages/browse-page'
@@ -21,6 +23,8 @@ function AppShell() {
 
   return (
     <div className="min-h-screen bg-[#111]">
+      <SiteScrollbar />
+      <AutoOverlayScrollbars />
       {hideNav ? null : <SiteHeader />}
       <Routes>
         <Route element={<GuestOnly />}>

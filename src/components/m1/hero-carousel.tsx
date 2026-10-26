@@ -4,7 +4,7 @@ import { heroBanners } from '@/data/manga-one-en'
 import { cn } from '@/lib/utils'
 
 const N = heroBanners.length
-/** Exactly 3 cards on screen — others slide in. */
+/** 3 cards on screen; side inset = gap between cards. */
 const VISIBLE = 3
 const GAP = 14
 const COPIES = 3
@@ -71,11 +71,10 @@ export function HeroCarousel() {
     return () => window.clearInterval(id)
   }, [])
 
-  const sidePad = 16
-  const innerW = Math.max(0, stageW - sidePad * 2)
-  const cardW = innerW > 0 ? (innerW - GAP * (VISIBLE - 1)) / VISIBLE : 280
+  // left pad + 3 cards + 2 gaps + right pad — pads equal the gap
+  const cardW = stageW > 0 ? (stageW - GAP * (VISIBLE + 1)) / VISIBLE : 300
   const step = cardW + GAP
-  const baseX = sidePad - index * step
+  const baseX = stageW / 2 - cardW / 2 - index * step
 
   const onPointerDown = (e: React.PointerEvent) => {
     dragging.current = true
@@ -116,8 +115,8 @@ export function HeroCarousel() {
       <div className="relative py-4 md:py-6">
         <div
           ref={stageRef}
-          className="relative mx-auto w-full max-w-[1200px] touch-pan-y overflow-hidden select-none"
-          style={{ height: cardW * (10 / 16) }}
+          className="relative w-full touch-pan-y overflow-hidden select-none"
+          style={{ height: Math.max(160, cardW * (10 / 16)) }}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={endDrag}
@@ -135,18 +134,21 @@ export function HeroCarousel() {
               transform: `translate3d(${baseX + dragX}px, 0, 0)`,
             }}
           >
-            {slides.map((b) => (
+            {slides.map((b, i) => (
               <button
                 key={b.key}
                 type="button"
                 aria-label={b.title}
                 onClick={() => {
                   if (Math.abs(dragX) > 10) return
-                  // find index of this clone
-                  const idx = slides.findIndex((s) => s.key === b.key)
-                  if (idx >= 0) jumpTo(idx)
+                  jumpTo(i)
                 }}
-                className="relative h-full shrink-0 cursor-pointer overflow-hidden rounded-xl bg-[#222] shadow-[0_8px_28px_rgba(0,0,0,0.4)]"
+                className={cn(
+                  'relative h-full shrink-0 cursor-pointer overflow-hidden rounded-xl bg-[#222] transition-[box-shadow,opacity] duration-500',
+                  i === index
+                    ? 'z-[2] shadow-[0_12px_36px_rgba(0,0,0,0.55)] ring-2 ring-white/30'
+                    : 'z-[1] opacity-85 shadow-[0_8px_24px_rgba(0,0,0,0.35)]',
+                )}
                 style={{ width: cardW }}
               >
                 <img src={b.image} alt="" draggable={false} className="h-full w-full object-cover" />
@@ -164,7 +166,7 @@ export function HeroCarousel() {
               e.stopPropagation()
               go(-1)
             }}
-            className="absolute top-1/2 left-2 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition hover:bg-black/75 md:left-3"
+            className="absolute top-1/2 left-3 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition hover:bg-black/75 md:left-5"
             aria-label="Previous"
           >
             <Icon icon="lucide:chevron-left" width={22} height={22} />
@@ -175,7 +177,7 @@ export function HeroCarousel() {
               e.stopPropagation()
               go(1)
             }}
-            className="absolute top-1/2 right-2 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition hover:bg-black/75 md:right-3"
+            className="absolute top-1/2 right-3 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition hover:bg-black/75 md:right-5"
             aria-label="Next"
           >
             <Icon icon="lucide:chevron-right" width={22} height={22} />
