@@ -1,28 +1,34 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { LibloLogo } from '@/components/brand/liblo-logo'
 import { Icon } from '@/components/icons/icon'
 import { useAuth } from '@/lib/auth'
 import { cn } from '@/lib/utils'
 
 const links = [
   { to: '/', label: 'Home' },
-  { to: '/scroll', label: 'Scroll' },
+  { to: '/comic', label: 'Comic' },
   { to: '/chat', label: 'Chat novels' },
   { to: '/ebooks', label: 'E-books' },
-  { to: '/new', label: 'New & Popular' },
+  { to: '/new', label: 'Ranking' },
   { to: '/my-list', label: 'My List' },
 ]
 
 export function Navbar() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 0)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false)
+        setSearchOpen(false)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
   }, [])
 
   const onSignOut = () => {
@@ -32,143 +38,136 @@ export function Navbar() {
 
   return (
     <>
-      <div className="pointer-events-none fixed top-0 z-[99] h-[70px] w-full bg-gradient-to-b from-black/80 to-transparent" />
+      <header className="fixed top-0 z-[100] h-[56px] w-full bg-[#111]/92 backdrop-blur-md">
+        <div className="relative mx-auto flex h-full max-w-6xl items-center justify-between px-4">
+          {/* Left — account */}
+          <Link
+            to="/account"
+            className="inline-flex items-center gap-1.5 rounded-full bg-white/8 px-3 py-1.5 text-[12px] font-medium text-white/90 transition hover:bg-brand/20 hover:text-white"
+          >
+            <Icon icon="lucide:user" width={14} height={14} className="text-brand-bright" />
+            <span className="hidden sm:inline">{user?.displayName || 'Account'}</span>
+          </Link>
 
-      <nav
-        className={cn(
-          'fixed top-0 z-[100] flex h-[68px] w-full items-center transition-colors duration-500',
-          scrolled ? 'bg-[#141414]' : 'bg-transparent',
-        )}
-      >
-        <div className="flex w-full items-center justify-between px-4 md:px-[60px]">
-          <div className="flex items-center">
-            <Link to="/" className="mr-[25px] shrink-0">
-              <span className="font-display text-[1.75rem] font-bold tracking-tight text-brand">
-                LIBLO
-              </span>
-            </Link>
+          {/* Center — logo */}
+          <Link
+            to="/"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            aria-label="LIBLO home"
+          >
+            <LibloLogo className="text-[28px] sm:text-[32px]" />
+          </Link>
 
-            <div className="hidden items-center md:flex">
-              {links.map((link) => (
-                <NavLink
-                  key={link.label}
-                  to={link.to}
-                  end={link.to === '/'}
-                  className={({ isActive }) =>
-                    cn('nav-link', isActive && 'font-semibold text-white')
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              ))}
-            </div>
-
+          {/* Right — search + menu */}
+          <div className="flex items-center gap-1.5">
             <button
               type="button"
-              className="cursor-pointer p-2 text-white md:hidden"
-              onClick={() => setMobileOpen((v) => !v)}
-              aria-label="Menu"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-white transition hover:bg-white/10"
+              aria-label="Search"
+              onClick={() => setSearchOpen((v) => !v)}
             >
-              <Icon icon={mobileOpen ? 'lucide:x' : 'lucide:menu'} width={24} height={24} />
+              <Icon icon="lucide:search" width={20} height={20} />
+            </button>
+            <button
+              type="button"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-white/15 bg-white/5 text-white transition hover:border-brand hover:bg-brand/15"
+              aria-label="Menu"
+              onClick={() => setMenuOpen((v) => !v)}
+            >
+              <Icon icon={menuOpen ? 'lucide:x' : 'lucide:menu'} width={20} height={20} />
             </button>
           </div>
+        </div>
 
-          <div className="flex items-center gap-2">
-            <label className="group/search relative flex h-9 w-[160px] items-center rounded-full border border-white/25 bg-black/40 pr-3 pl-3 transition-all duration-300 focus-within:w-[220px] focus-within:border-brand focus-within:bg-black/70 sm:w-[200px] sm:focus-within:w-[260px]">
-              <Icon
-                icon="lucide:search"
-                width={16}
-                height={16}
-                className="shrink-0 text-white/70 transition-colors group-focus-within/search:text-brand"
-              />
+        {searchOpen ? (
+          <div className="border-t border-white/8 bg-[#111] px-4 py-3">
+            <label className="mx-auto flex max-w-6xl items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 focus-within:border-brand">
+              <Icon icon="lucide:search" width={16} height={16} className="text-brand-bright" />
               <input
+                autoFocus
                 type="search"
-                placeholder="Search"
-                className="ml-2 w-full min-w-0 bg-transparent text-[13px] text-white outline-none placeholder:text-white/50"
+                placeholder="Search titles, genres…"
+                className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/40"
                 aria-label="Search"
               />
             </label>
-
-            <button
-              type="button"
-              className="relative cursor-pointer p-[10px] text-white transition-colors hover:text-[#e5e5e5]"
-              aria-label="Notifications"
-            >
-              <Icon icon="lucide:bell" width={20} height={20} />
-              <span className="absolute top-[2px] right-[2px] flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-brand text-[11px] font-bold text-white">
-                3
-              </span>
-            </button>
-
-            <div className="group relative ml-[10px]">
-              <div className="flex cursor-pointer items-center gap-2 py-[2px]">
-                <img
-                  src={user?.avatarUrl || '/covers/midnight-chat.jpg'}
-                  alt=""
-                  className="h-[32px] w-[32px] rounded object-cover"
-                />
-                <div className="mt-[2px] border-t-[4px] border-r-[4px] border-l-[4px] border-t-white border-r-transparent border-l-transparent transition-transform duration-200 group-hover:rotate-180" />
-              </div>
-
-              <div className="invisible absolute top-full right-0 pt-[8px] opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
-                <div className="min-w-[220px] border-t border-t-white/20 bg-[rgba(0,0,0,0.9)] py-[10px] shadow-xl">
-                  <div className="flex items-center px-[10px] py-[5px] text-[13px] text-white">
-                    <img
-                      src={user?.avatarUrl || '/covers/midnight-chat.jpg'}
-                      alt=""
-                      className="mr-[10px] h-[32px] w-[32px] rounded object-cover"
-                    />
-                    <span>{user?.displayName || 'Reader'}</span>
-                  </div>
-                  <Link to="/account" className="dropdown-link">
-                    Account
-                  </Link>
-                  <Link to="/writer" className="dropdown-link">
-                    Writer studio
-                  </Link>
-                  <Link to="/help" className="dropdown-link">
-                    Help Center
-                  </Link>
-                  <div className="my-[9px] h-px bg-[#737373]" />
-                  <button
-                    type="button"
-                    onClick={onSignOut}
-                    className="dropdown-link w-full cursor-pointer text-left"
-                  >
-                    Sign out of Liblo
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
-      </nav>
+        ) : null}
+      </header>
 
+      {/* Slide menu — Manga One style */}
       <div
         className={cn(
-          'fixed inset-0 z-[90] bg-[#141414] transition-transform duration-300',
-          mobileOpen ? 'translate-x-0' : 'translate-x-full',
+          'fixed inset-0 z-[90] bg-[#111]/70 transition-opacity duration-300',
+          menuOpen ? 'opacity-100' : 'pointer-events-none opacity-0',
+        )}
+        onClick={() => setMenuOpen(false)}
+      />
+      <aside
+        className={cn(
+          'fixed top-0 right-0 z-[95] flex h-full w-[min(320px,88vw)] flex-col bg-[#1a1a1a] shadow-2xl transition-transform duration-300',
+          menuOpen ? 'translate-x-0' : 'translate-x-full',
         )}
       >
-        <div className="flex flex-col space-y-4 px-8 pt-[80px]">
+        <div className="flex items-center justify-between border-b border-white/8 px-5 py-4">
+          <LibloLogo className="text-[24px]" />
+          <button
+            type="button"
+            className="cursor-pointer rounded-full p-2 text-white/70 hover:bg-white/10 hover:text-white"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <Icon icon="lucide:x" width={20} height={20} />
+          </button>
+        </div>
+
+        <nav className="flex-1 overflow-y-auto px-3 py-4">
           {links.map((link) => (
-            <Link
-              key={link.label}
+            <NavLink
+              key={link.to}
               to={link.to}
-              className="text-[16px] text-white"
-              onClick={() => setMobileOpen(false)}
+              end={link.to === '/'}
+              onClick={() => setMenuOpen(false)}
+              className={({ isActive }) =>
+                cn(
+                  'mb-1 flex items-center justify-between rounded-xl px-4 py-3 text-[15px] font-medium transition',
+                  isActive
+                    ? 'bg-brand/15 text-brand-bright'
+                    : 'text-white/85 hover:bg-white/6 hover:text-white',
+                )
+              }
             >
               {link.label}
-            </Link>
+              <img src="/manga-ui/navigation-arrow.svg" alt="" className="h-3 w-3 opacity-45" />
+            </NavLink>
           ))}
-          <Link to="/account" className="text-[16px] text-white" onClick={() => setMobileOpen(false)}>
-            Account
+          <div className="my-3 h-px bg-white/8" />
+          <Link
+            to="/writer"
+            onClick={() => setMenuOpen(false)}
+            className="mb-1 flex items-center justify-between rounded-xl px-4 py-3 text-[15px] text-white/85 hover:bg-white/6"
+          >
+            Writer studio
+            <img src="/manga-ui/navigation-arrow.svg" alt="" className="h-3 w-3 opacity-45" />
           </Link>
-          <Link to="/help" className="text-[16px] text-white" onClick={() => setMobileOpen(false)}>
-            Help Center
+          <Link
+            to="/help"
+            onClick={() => setMenuOpen(false)}
+            className="mb-1 flex items-center justify-between rounded-xl px-4 py-3 text-[15px] text-white/85 hover:bg-white/6"
+          >
+            Help
+            <img src="/manga-ui/navigation-arrow.svg" alt="" className="h-3 w-3 opacity-45" />
           </Link>
-        </div>
-      </div>
+        </nav>
+
+        <button
+          type="button"
+          onClick={onSignOut}
+          className="m-4 cursor-pointer rounded-full border border-brand bg-brand/10 py-3 text-sm font-semibold text-brand-bright transition hover:bg-brand hover:text-white"
+        >
+          Sign out
+        </button>
+      </aside>
     </>
   )
 }

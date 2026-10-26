@@ -58,7 +58,9 @@ export function SeriesModal({ series, onClose }: Props) {
                   {series.year} · {series.seasons}
                 </span>
                 <span className="border border-white/40 px-1 text-xs">{series.quality}</span>
-                <span className="text-white/70">{series.format}</span>
+                <span className="text-white/70">
+                  {series.format === 'SCROLL' ? 'COMIC' : series.format}
+                </span>
               </div>
 
               <div className="mb-4 flex flex-wrap gap-2">

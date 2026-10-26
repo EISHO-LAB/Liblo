@@ -16,7 +16,7 @@ bun install
 bun dev
 ```
 
-API proxy: `/api` → `http://localhost:3000` (Liblo-back).
+API proxy: `/api` → `http://localhost:3020` (Liblo-back).
 
 ## UI conventions
 

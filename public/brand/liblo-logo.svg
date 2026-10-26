@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 72" fill="none" role="img" aria-label="LIBLO">
+  <text
+    x="8"
+    y="52"
+    fill="#F6334F"
+    font-family="Outfit, system-ui, sans-serif"
+    font-size="52"
+    font-weight="800"
+    letter-spacing="-3"
+  >LIBL</text>
+  <!-- speech-bubble O -->
+  <g transform="translate(198 8)">
+    <path
+      d="M28 2C13.64 2 2 12.8 2 26.2c0 7.8 4.55 14.7 11.5 18.9L9.5 58l11.3-5.3C22.5 53.7 25.1 54.2 28 54.2c14.36 0 26-10.8 26-24S42.36 2 28 2Z"
+      fill="#F6334F"
+    />
+    <ellipse cx="28" cy="26" rx="11" ry="10" fill="#fff"/>
+    <path d="M22 22h12M22 26h12M22 30h7" stroke="#F6334F" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -21,7 +21,7 @@ export const categories = [
   { id: 'romance', label: 'Romance' },
   { id: 'fantasy', label: 'Fantasy & action' },
   { id: 'chat', label: 'Chat novels' },
-  { id: 'scroll', label: 'Vertical scroll' },
+  { id: 'scroll', label: 'Comics' },
   { id: 'ebook', label: 'E-books' },
 ] as const
 

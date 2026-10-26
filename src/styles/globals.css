@@ -8,10 +8,16 @@
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-netflix-black: #141414;
-  --color-netflix-red: #0071eb;
-  --color-brand-blue: #0071eb;
-  --color-netflix-gray: #808080;
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-netflix-black: #111111;
+  --color-m1: #f6334f;
+  --color-m1-soft: #ff6278;
+  --color-brand: #f6334f;
+  --color-brand-bright: #ff6278;
+  --color-brand-blue: #1a7aff;
+  --color-netflix-red: #f6334f;
+  --color-netflix-gray: #707070;
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -20,21 +26,24 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
-  --color-brand: #0071eb;
   --color-match: #22c55e;
 }
 
 :root {
-  --background: #141414;
+  /* Manga One clone tokens (https://manga-one.com/) — English Liblo shell */
+  --background: #111111;
   --foreground: #ffffff;
-  --primary: #0071eb;
+  --surface: #1a1a1a;
+  --surface-2: #242424;
+  --primary: #f6334f;
   --primary-foreground: #ffffff;
-  --secondary: rgba(109, 109, 110, 0.7);
+  --secondary: rgba(255, 255, 255, 0.12);
   --secondary-foreground: #ffffff;
   --muted: #2f2f2f;
-  --muted-foreground: #b3b3b3;
-  --border: rgba(255, 255, 255, 0.2);
-  --ring: rgba(255, 255, 255, 0.4);
+  --muted-foreground: #b8b8b8;
+  --border: rgba(255, 255, 255, 0.12);
+  --ring: rgba(246, 51, 79, 0.5);
+  --header-h: 64px;
 }
 
 @layer base {
@@ -49,7 +58,7 @@
     min-height: 100vh;
     width: 100%;
     overflow-x: hidden;
-    background-color: #141414;
+    background-color: #111111;
     color: #fff;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -81,12 +90,55 @@
 }
 
 @layer components {
-  .nav-link {
-    @apply px-[10px] text-[14px] text-white transition-colors hover:text-[#e5e5e5];
+  .m1-dot-bg {
+    background-color: #1a1a1a;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 6px 6px;
   }
 
-  .dropdown-link {
-    @apply block px-[10px] py-[5px] text-[13px] text-[#b3b3b3] hover:underline;
+  .m1-watermark {
+    pointer-events: none;
+    user-select: none;
+    position: absolute;
+    left: 0;
+    top: -0.15em;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(3.5rem, 12vw, 7rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.06);
+    text-transform: uppercase;
+  }
+
+  .m1-watermark-light {
+    color: rgba(0, 0, 0, 0.06);
+  }
+
+  .up-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #e1203c;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    padding: 1px 5px;
+    border-radius: 2px;
+    line-height: 1.4;
+  }
+
+  .see-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 4px;
   }
 }
 
@@ -98,5 +150,9 @@
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  .pt-header {
+    padding-top: var(--header-h);
   }
 }

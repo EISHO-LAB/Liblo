@@ -1,9 +1,10 @@
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { GuestOnly, RequireAuth } from '@/components/auth/require-auth'
-import { Navbar } from '@/components/netflix/navbar'
+import { SiteHeader } from '@/components/m1/site-header'
 import { AuthProvider } from '@/lib/auth'
 import { AccountPage } from '@/pages/account-page'
 import { BrowsePage } from '@/pages/browse-page'
+import { ComicPage } from '@/pages/comic-page'
 import { HelpPage } from '@/pages/help-page'
 import { HomePage } from '@/pages/home-page'
 import { LoginPage } from '@/pages/login-page'
@@ -19,8 +20,8 @@ function AppShell() {
   const hideNav = AUTH_PATHS.has(location.pathname)
 
   return (
-    <div className="min-h-screen bg-netflix-black">
-      {hideNav ? null : <Navbar />}
+    <div className="min-h-screen bg-[#111]">
+      {hideNav ? null : <SiteHeader />}
       <Routes>
         <Route element={<GuestOnly />}>
           <Route path="/login" element={<LoginPage />} />
@@ -30,14 +31,19 @@ function AppShell() {
 
         <Route element={<RequireAuth />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/comic" element={<ComicPage />} />
+          <Route path="/scroll" element={<Navigate to="/comic" replace />} />
+          <Route path="/titles" element={<BrowsePage title="Title list" description="All series" />} />
           <Route
-            path="/scroll"
+            path="/fair"
             element={
-              <BrowsePage
-                title="Vertical Scroll"
-                categoryId="scroll"
-                description="Webtoon-style vertical stories"
-              />
+              <BrowsePage title="Fair titles" categoryId="trending" description="Campaign & fair works" />
+            }
+          />
+          <Route
+            path="/oneshots"
+            element={
+              <BrowsePage title="One-shots" categoryId="scroll" description="Complete in one sitting" />
             }
           />
           <Route
@@ -57,15 +63,22 @@ function AppShell() {
             }
           />
           <Route
+            path="/coins"
+            element={
+              <BrowsePage title="Buy coins" description="Top up to unlock episodes" />
+            }
+          />
+          <Route
             path="/new"
             element={
               <BrowsePage
                 title="New & Popular"
                 categoryId="trending"
-                description="Trending on Liblo right now"
+                description="Trending on LIBLO right now"
               />
             }
           />
+          <Route path="/search" element={<BrowsePage title="Search" description="Find a title" />} />
           <Route path="/my-list" element={<MyListPage />} />
           <Route path="/account" element={<AccountPage />} />
           <Route path="/help" element={<HelpPage />} />

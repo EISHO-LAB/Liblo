@@ -1,10 +1,28 @@
 # Design source
 
-Browse UI adapted from:
+**100% layout clone (English) of [マンガワン / Manga One](https://manga-one.com/)**
 
-**[deepanik/Netflix](https://github.com/deepanik/Netflix)**  
-Demo: https://netflix-clone-henna-psi.vercel.app
+Local scrape: `~/Desktop/manga_one.com`  
+Served assets: `Liblo-front/public/m1/` (UI chrome + scraped covers/banners for prototyping)
 
-Classic Netflix layout: sticky top nav (solid on scroll), full-bleed hero, overlapping horizontal rows, hover card actions, detail modal.
+## What matches Manga One
 
-Liblo keeps local catalog + cover images; brand mark is **LIBLO**.
+- White desktop pill header (logo + nav + login / search / menu)
+- Mobile centered logo capsule header
+- Hero multi-card carousel + dots
+- “Today’s updates!!” rail with **UP** badges + See more
+- Weekday ranking tabs + ordinal badge cards + ORIGINAL badge
+- Recommended / Original / One-shot / Comics rails with giant watermark text
+- Light `RECOMMEND` band (`#f2f2f2`)
+- Dot-grid dark body, magenta primary `#F6334F`
+- Footer CTA + app badges + ABJ + mascot assets
+
+## English / Liblo deltas
+
+- All chrome copy translated to English
+- Brand wordmark **LIBLO** (speech-bubble + book mark) instead of マンガワン logotype
+- Title names/synopses are English placeholders — swap for your catalog later
+
+## Note
+
+Scraped manga artwork is for local UI prototyping only. Replace with licensed Liblo catalog before any public release.

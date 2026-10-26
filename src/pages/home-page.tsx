@@ -1,67 +1,88 @@
-import { useState } from 'react'
-import { Icon } from '@/components/icons/icon'
-import { SeriesModal } from '@/components/netflix/series-modal'
-import { SeriesRow } from '@/components/netflix/series-row'
-import { catalog, featuredSeries, railFor, type SeriesCard } from '@/data/catalog'
+import { HeroCarousel } from '@/components/m1/hero-carousel'
+import { DayRanking } from '@/components/m1/day-ranking'
+import { RecommendRail } from '@/components/m1/recommend-rail'
+import { SiteFooter } from '@/components/m1/site-footer'
+import { TodayUpdates } from '@/components/m1/today-updates'
+import {
+  comicsShelf,
+  oneShots,
+  originals,
+  recommended,
+} from '@/data/manga-one-en'
 
 export function HomePage() {
-  const [selected, setSelected] = useState<SeriesCard | null>(null)
-
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-netflix-black">
-      {/* Hero — deepanik/Netflix proportions */}
-      <div className="relative h-[56.25vw] max-h-[95vh] min-h-[400px] w-full">
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-transparent via-netflix-black/60 to-netflix-black" />
-        <img
-          src={featuredSeries.coverUrl}
-          alt=""
-          className="h-full w-full object-cover object-[center_20%]"
-        />
-
-        <div className="absolute top-[35%] left-4 z-20 max-w-[80%] sm:top-[30%] sm:max-w-[70%] md:left-[60px] md:max-w-[50%]">
-          <h1 className="mb-3 font-display text-3xl font-bold text-white sm:text-4xl md:mb-4 md:text-5xl lg:text-6xl">
-            {featuredSeries.title}
-          </h1>
-          <div className="mb-3 flex flex-wrap items-center gap-2 text-sm text-white/80">
-            <span>
-              {featuredSeries.year} · {featuredSeries.seasons}
-            </span>
-            <span className="border border-white/40 px-1 text-xs">{featuredSeries.quality}</span>
-          </div>
-          <p className="mb-4 line-clamp-3 text-sm text-white sm:text-base md:mb-6 md:line-clamp-4 md:text-lg">
-            {featuredSeries.synopsis}
-          </p>
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              className="flex min-w-[100px] cursor-pointer items-center justify-center rounded bg-white px-4 py-1.5 font-semibold text-black transition hover:bg-white/80 sm:px-6 sm:py-2 md:px-8"
-            >
-              <Icon icon="lucide:play" width={20} height={20} className="mr-1 sm:mr-2" />
-              <span>Play</span>
-            </button>
-            <button
-              type="button"
-              className="flex min-w-[130px] cursor-pointer items-center justify-center rounded bg-gray-500/70 px-4 py-1.5 font-semibold text-white transition hover:bg-gray-500/50 sm:px-6 sm:py-2 md:px-8"
-              onClick={() => setSelected(featuredSeries)}
-            >
-              <Icon icon="lucide:info" width={20} height={20} className="mr-1 sm:mr-2" />
-              <span>More Info</span>
-            </button>
-          </div>
-        </div>
+    <div className="min-h-screen bg-[#111]">
+      {/* Dark top — hero slider */}
+      <div className="m1-dot-bg pb-6">
+        <HeroCarousel />
       </div>
 
-      {/* Rows overlap hero like deepanik */}
-      <div className="relative z-20 -mt-32 md:-mt-40">
-        <SeriesRow title="Trending Now" items={railFor('trending')} onSeriesClick={setSelected} />
-        <SeriesRow title="Romance" items={railFor('romance')} onSeriesClick={setSelected} />
-        <SeriesRow title="Vertical Scroll" items={railFor('scroll')} onSeriesClick={setSelected} />
-        <SeriesRow title="Chat Novels" items={railFor('chat')} onSeriesClick={setSelected} />
-        <SeriesRow title="E-books" items={railFor('ebook')} onSeriesClick={setSelected} />
-        <SeriesRow title="All Titles" items={catalog} onSeriesClick={setSelected} />
+      {/* White — today’s updates + UPDATE watermark */}
+      <TodayUpdates />
+
+      {/* Dark — ranking */}
+      <div className="m1-dot-bg pt-2 pb-4">
+        <DayRanking />
       </div>
 
-      {selected ? <SeriesModal series={selected} onClose={() => setSelected(null)} /> : null}
+      <RecommendRail
+        title="Recommended titles"
+        watermark="RECOMMEND"
+        items={recommended}
+        light
+      />
+
+      <div className="m1-dot-bg">
+        <RecommendRail title="LIBLO originals" watermark="ORIGINAL" items={originals} />
+      </div>
+
+      <RecommendRail title="One-shots" watermark="ONESHOT" items={oneShots} light />
+
+      <div className="m1-dot-bg pb-4">
+        <RecommendRail title="Comics" watermark="COMICS" items={comicsShelf} />
+
+        <section className="relative mx-auto mt-10 max-w-[1200px] overflow-hidden px-4 md:px-6">
+          <div className="relative flex flex-col items-center gap-4 overflow-hidden rounded-2xl bg-[#1a1a1a] px-6 py-10 md:flex-row md:justify-between">
+            <img
+              src="/m1/assets/home/movie-section/rectangle-left-sp.svg"
+              alt=""
+              className="pointer-events-none absolute top-0 left-0 h-full opacity-80"
+            />
+            <img
+              src="/m1/assets/home/movie-section/rectangle-right-sp.svg"
+              alt=""
+              className="pointer-events-none absolute top-0 right-0 h-full opacity-80"
+            />
+            <div className="relative z-10 max-w-md">
+              <p className="text-sm font-bold tracking-wide text-m1-soft uppercase">Featured PR</p>
+              <h2 className="mt-1 font-display text-2xl font-extrabold text-white md:text-3xl">
+                LIBLO pick titles — trailer zone
+              </h2>
+              <p className="mt-2 text-sm text-white/60">
+                Highlighted series promo clips. Swap in your own videos when you adapt the catalog.
+              </p>
+            </div>
+            <img
+              src="/m1/assets/home/movie-section/cerberus-kun.png"
+              alt=""
+              className="relative z-10 h-36 w-auto md:h-44"
+            />
+          </div>
+        </section>
+
+        <section className="mx-auto mt-10 flex max-w-[1200px] flex-wrap items-end justify-center gap-8 px-4 py-8 md:px-6">
+          <img
+            src="/m1/assets/home/content-section/ninki-manga-no.png"
+            alt="Popular manga"
+            className="h-16 w-auto opacity-90"
+          />
+          <img src="/m1/assets/home/content-section/choitashi.png" alt="" className="h-20 w-auto" />
+          <img src="/m1/assets/character/cerberus-kun.webp" alt="" className="h-24 w-auto" />
+        </section>
+      </div>
+
+      <SiteFooter />
     </div>
   )
 }
