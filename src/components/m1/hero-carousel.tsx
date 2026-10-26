@@ -112,7 +112,7 @@ export function HeroCarousel() {
         <div className="absolute inset-0 bg-[#111]/72" />
       </div>
 
-      <div className="relative pt-3 pb-2 md:pt-4 md:pb-3">
+      <div className="relative pt-5 pb-5 md:pt-7 md:pb-7">
         <div
           ref={stageRef}
           className="relative w-full touch-pan-y overflow-hidden select-none"
@@ -184,7 +184,7 @@ export function HeroCarousel() {
           </button>
         </div>
 
-        <div className="relative mt-3 flex items-center justify-center gap-1.5">
+        <div className="relative mt-4 flex items-center justify-center gap-1.5">
           {heroBanners.map((b, i) => (
             <button
               key={b.id}
