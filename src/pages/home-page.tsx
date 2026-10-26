@@ -13,12 +13,12 @@ import {
 export function HomePage() {
   return (
     <div className="min-h-screen bg-[#111]">
-      {/* Slider + Rank — grouped first-screen block */}
-      <div>
-        <div className="m1-dot-bg">
+      {/* Slider cards unchanged; leftover viewport = scaled mt inside rank */}
+      <div className="flex h-dvh flex-col overflow-hidden">
+        <div className="m1-dot-bg shrink-0">
           <HeroCarousel />
         </div>
-        <DayRanking />
+        <DayRanking className="flex min-h-0 flex-1 flex-col" />
       </div>
 
       {/* 3) New updates + day filter */}
