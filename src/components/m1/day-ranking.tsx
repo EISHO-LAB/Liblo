@@ -5,15 +5,26 @@ import { cn } from '@/lib/utils'
 
 const ITEMS = rankingPool.slice(0, 7)
 
-export function DayRanking() {
+/** Bottom-right promo badges — Manga One style, English. */
+const PROMO: Record<number, { tone: 'hot' | 'free' | 'deal'; label: string }> = {
+  1: { tone: 'hot', label: 'HOT' },
+  2: { tone: 'free', label: 'FREE' },
+  3: { tone: 'deal', label: 'FREE' },
+  4: { tone: 'free', label: 'FREE' },
+  5: { tone: 'free', label: 'FREE' },
+  6: { tone: 'hot', label: 'HOT' },
+  7: { tone: 'hot', label: 'HOT' },
+}
+
+export function DayRanking({ className }: { className?: string }) {
   const d = new Date()
 
   return (
-    <section className="relative bg-white">
-      <div className="relative mx-auto max-w-[1200px] px-4 py-8 md:px-6">
+    <section className={cn('relative bg-white', className)}>
+      <div className="relative mx-auto max-w-[1200px] px-4 pt-5 pb-7 md:px-6 md:pt-6 md:pb-8">
         <span className="m1-watermark m1-watermark-light">RANK</span>
 
-        <div className="relative mb-5 flex flex-wrap items-end justify-between gap-2">
+        <div className="relative mb-4 flex flex-wrap items-end justify-between gap-2">
           <h2 className="flex items-center gap-2 font-display text-lg font-extrabold text-[#111] md:text-xl">
             <Icon icon="lucide:flame" width={20} height={20} className="text-m1" />
             Weekly ranking
@@ -23,51 +34,42 @@ export function DayRanking() {
           </p>
         </div>
 
-        {/* Fixed 7-card grid */}
-        <div className="relative grid grid-cols-3 gap-3 pt-3 sm:grid-cols-4 md:grid-cols-7 md:gap-3">
+        <div className="relative grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-7 md:gap-3">
           {ITEMS.map((t, i) => {
             const rank = i + 1
-            const isTop3 = rank <= 3
+            const promo = PROMO[rank]
 
             return (
               <Link key={t.id} to="/comic" className="relative min-w-0">
                 <div className="relative overflow-visible">
-                  {isTop3 ? <NewStyleBadge rank={rank} /> : null}
-
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-[#eee] shadow-sm ring-1 ring-black/10">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-[#eee] ring-1 ring-black/8">
                     <img
                       src={t.cover}
                       alt=""
                       className="h-full w-full object-cover object-top"
                     />
 
-                    {isTop3 ? (
-                      <div className="absolute top-[6px] right-0 left-[34px] z-[1] h-[3px] bg-[#e1203c]" />
-                    ) : (
-                      <span
-                        className={cn(
-                          'absolute top-2 left-2 z-[1] flex h-7 w-7 items-center justify-center rounded-full font-display text-[12px] font-extrabold shadow-md ring-2 ring-white',
-                          rank === 4 && 'bg-[#1a1a1a] text-white',
-                          rank === 5 && 'bg-[#3a3a3a] text-white',
-                          rank === 6 && 'bg-[#5a5a5a] text-white',
-                          rank === 7 && 'bg-[#7a7a7a] text-white',
-                        )}
-                      >
-                        {rank}
+                    {t.isOriginal ? (
+                      <span className="absolute top-1.5 left-1.5 z-[1] rounded-[2px] bg-black/55 px-1.5 py-0.5 text-[9px] font-bold tracking-wide text-white backdrop-blur-[2px]">
+                        ORIGINAL
                       </span>
-                    )}
+                    ) : null}
+
+                    {promo ? <PromoBadge tone={promo.tone} label={promo.label} /> : null}
                   </div>
+
+                  {/* Half on cover, half over title — does not push title down */}
+                  <span
+                    aria-hidden
+                    className="rank-num pointer-events-none absolute bottom-0 -left-2.5 z-10 translate-y-[16%] font-display"
+                  >
+                    {rank}
+                  </span>
                 </div>
 
-                <div className="mt-2 space-y-0.5">
-                  <p className="line-clamp-2 text-[11px] font-bold leading-snug text-[#111] sm:text-[12px]">
-                    {t.title}
-                  </p>
-                  <p className="flex items-center gap-1 text-[10px] text-[#888] sm:text-[11px]">
-                    {t.chapter ?? 'Ep. 1'}
-                    <Icon icon="lucide:book-marked" width={10} height={10} className="opacity-70" />
-                  </p>
-                </div>
+                <p className="mt-3 truncate text-[11px] font-bold leading-snug text-[#333] sm:text-[12px]">
+                  {t.title}
+                </p>
               </Link>
             )
           })}
@@ -77,19 +79,26 @@ export function DayRanking() {
   )
 }
 
-function NewStyleBadge({ rank }: { rank: number }) {
+function PromoBadge({ tone, label }: { tone: 'hot' | 'free' | 'deal'; label: string }) {
   return (
     <div
-      className="pointer-events-none absolute -top-2.5 -left-2.5 z-20 h-[48px] w-[48px]"
-      aria-label={`Rank ${rank}`}
+      className={cn(
+        'absolute right-0 bottom-0 z-[2] flex min-w-[42px] flex-col items-center overflow-hidden text-center leading-none',
+        tone === 'hot' && 'bg-[#F6334F]',
+        tone === 'free' && 'bg-[#e1203c]',
+        tone === 'deal' && 'bg-[#2f6bff]',
+      )}
+      style={
+        tone === 'hot'
+          ? { clipPath: 'polygon(0 8%, 12% 0, 28% 10%, 45% 0, 62% 9%, 78% 0, 100% 8%, 100% 100%, 0 100%)' }
+          : undefined
+      }
     >
-      <div
-        className="absolute top-[3px] left-[3px] h-[34px] w-[34px] rotate-45 bg-[#e1203c]"
-        style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.28)' }}
-      />
-      <div className="absolute top-[7px] left-[7px] h-[26px] w-[26px] rotate-45 border-[2px] border-white" />
-      <span className="absolute top-[13px] left-[13px] flex h-[14px] w-[14px] items-center justify-center font-display text-[12px] font-extrabold leading-none text-white">
-        {rank}
+      <span className="px-1.5 pt-1.5 pb-0.5 text-[9px] font-extrabold tracking-wide text-white">
+        {label}
+      </span>
+      <span className="mb-0.5 w-[calc(100%-4px)] bg-white px-1 py-[1px] text-[8px] font-extrabold text-[#111]">
+        ¥0
       </span>
     </div>
   )

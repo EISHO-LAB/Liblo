@@ -13,13 +13,13 @@ import {
 export function HomePage() {
   return (
     <div className="min-h-screen bg-[#111]">
-      {/* 1) Slider */}
-      <div className="m1-dot-bg">
-        <HeroCarousel />
+      {/* Slider + Rank — grouped first-screen block */}
+      <div>
+        <div className="m1-dot-bg">
+          <HeroCarousel />
+        </div>
+        <DayRanking />
       </div>
-
-      {/* 2) Rank */}
-      <DayRanking />
 
       {/* 3) New updates + day filter */}
       <TodayUpdates />
