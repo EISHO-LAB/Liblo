@@ -1,21 +1,11 @@
 import { Link } from 'react-router-dom'
+import { ComicPromoBadge, RANK_PROMO } from '@/components/comic/promo-badge'
 import { ComicRankBadge } from '@/components/comic/rank-badge'
 import { Icon } from '@/components/icons/icon'
 import { rankingPool } from '@/data/comic'
 import { cn } from '@/lib/utils'
 
 const ITEMS = rankingPool.slice(0, 7)
-
-/** Bottom-right promo badges — Manga One style, English. */
-const PROMO: Record<number, { tone: 'hot' | 'free' | 'deal'; label: string }> = {
-  1: { tone: 'hot', label: 'HOT' },
-  2: { tone: 'free', label: 'FREE' },
-  3: { tone: 'deal', label: 'FREE' },
-  4: { tone: 'free', label: 'FREE' },
-  5: { tone: 'free', label: 'FREE' },
-  6: { tone: 'hot', label: 'HOT' },
-  7: { tone: 'hot', label: 'HOT' },
-}
 
 export function DayRanking({ className }: { className?: string }) {
   const d = new Date()
@@ -39,7 +29,7 @@ export function DayRanking({ className }: { className?: string }) {
         <div className="relative grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-7 md:gap-3">
           {ITEMS.map((t, i) => {
             const rank = i + 1
-            const promo = PROMO[rank]
+            const promo = RANK_PROMO[rank]
 
             return (
               <Link key={t.id} to="/comic" className="relative min-w-0">
@@ -57,7 +47,7 @@ export function DayRanking({ className }: { className?: string }) {
                       </span>
                     ) : null}
 
-                    {promo ? <PromoBadge tone={promo.tone} label={promo.label} /> : null}
+                    {promo ? <ComicPromoBadge tone={promo.tone} label={promo.label} /> : null}
                   </div>
 
                   <ComicRankBadge rank={rank} />
@@ -72,30 +62,5 @@ export function DayRanking({ className }: { className?: string }) {
         </div>
       </div>
     </section>
-  )
-}
-
-function PromoBadge({ tone, label }: { tone: 'hot' | 'free' | 'deal'; label: string }) {
-  return (
-    <div
-      className={cn(
-        'absolute right-0 bottom-0 z-[2] flex min-w-[42px] flex-col items-center overflow-hidden text-center leading-none',
-        tone === 'hot' && 'bg-[#F6334F]',
-        tone === 'free' && 'bg-[#e1203c]',
-        tone === 'deal' && 'bg-[#2f6bff]',
-      )}
-      style={
-        tone === 'hot'
-          ? { clipPath: 'polygon(0 8%, 12% 0, 28% 10%, 45% 0, 62% 9%, 78% 0, 100% 8%, 100% 100%, 0 100%)' }
-          : undefined
-      }
-    >
-      <span className="px-1.5 pt-1.5 pb-0.5 text-[9px] font-extrabold tracking-wide text-white">
-        {label}
-      </span>
-      <span className="mb-0.5 w-[calc(100%-4px)] bg-white px-1 py-[1px] text-[8px] font-extrabold text-[#111]">
-        ¥0
-      </span>
-    </div>
   )
 }

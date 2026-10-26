@@ -1,4 +1,5 @@
 export { ComicRankBadge } from './rank-badge'
+export { ComicPromoBadge, RANK_PROMO, promoForRank } from './promo-badge'
 export { DayRanking } from './day-ranking'
 export { HeroCarousel } from './hero-carousel'
 export { RecommendRail } from './recommend-rail'
