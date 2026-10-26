@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ComicPromoBadge, RANK_PROMO } from '@/components/comic/promo-badge'
 import { ComicRankBadge } from '@/components/comic/rank-badge'
+import { ComicTicketTag } from '@/components/comic/ticket-tag'
 import { Icon } from '@/components/icons/icon'
 import { rankingPool } from '@/data/comic'
 import { cn } from '@/lib/utils'
@@ -42,9 +43,12 @@ export function DayRanking({ className }: { className?: string }) {
                     />
 
                     {t.isOriginal ? (
-                      <span className="absolute top-1.5 left-1.5 z-[1] rounded-[2px] bg-black/55 px-1.5 py-0.5 text-[9px] font-bold tracking-wide text-white backdrop-blur-[2px]">
+                      <ComicTicketTag
+                        tone="special"
+                        className="absolute top-1.5 left-1.5 z-[1]"
+                      >
                         ORIGINAL
-                      </span>
+                      </ComicTicketTag>
                     ) : null}
 
                     {promo ? <ComicPromoBadge tone={promo.tone} label={promo.label} /> : null}

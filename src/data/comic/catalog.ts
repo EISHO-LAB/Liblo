@@ -15,17 +15,18 @@ export type ComicTitle = {
 export type M1Title = ComicTitle
 
 const c = (n: number) => `/m1/portrait/p${String(n).padStart(2, '0')}.webp`
-const r = (n: number) => `/m1/ranking-thumbs/r${String(n).padStart(2, '0')}.webp`
+const coverBanner = (n: number) => `/m1/covers/c${String(n).padStart(2, '0')}.webp`
 
+/** Real JP comic landscape banners only (no ultra-wide ranking strips / broken notice art). */
 export const heroBanners = [
-  { id: 'h1', title: 'Ranking Special 2026', image: '/m1/banners/b01.webp', href: '#' },
-  { id: 'h2', title: 'New Season Hits', image: '/m1/banners/b02.webp', href: '#' },
-  { id: 'h3', title: 'Editor Picks', image: '/m1/banners/b03.webp', href: '#' },
-  { id: 'h4', title: 'Action Spotlight', image: r(1), href: '#' },
-  { id: 'h5', title: 'Romance Week', image: r(2), href: '#' },
-  { id: 'h6', title: 'Fantasy Vault', image: r(3), href: '#' },
-  { id: 'h7', title: 'Daily Free Reads', image: r(4), href: '#' },
-  { id: 'h8', title: 'Original Series', image: r(5), href: '#' },
+  { id: 'h1', title: 'Weekly Ranking Special', image: '/m1/banners/b01.webp', href: '/comic' },
+  { id: 'h2', title: 'New Family — Updated Today', image: '/m1/banners/b02.webp', href: '/comic' },
+  { id: 'h3', title: 'Salesman in Another World', image: '/m1/banners/b03.webp', href: '/comic' },
+  { id: 'h4', title: 'MADBOY', image: coverBanner(1), href: '/comic' },
+  { id: 'h5', title: 'Deadline Fever', image: coverBanner(2), href: '/comic' },
+  { id: 'h6', title: 'Magic Library — Now Open', image: coverBanner(3), href: '/comic' },
+  { id: 'h7', title: 'Frontline Romance', image: coverBanner(4), href: '/comic' },
+  { id: 'h8', title: 'Editor Spotlight', image: coverBanner(5), href: '/comic' },
 ]
 
 const titles: Omit<ComicTitle, 'id'>[] = [

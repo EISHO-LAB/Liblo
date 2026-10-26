@@ -151,7 +151,12 @@ export function HeroCarousel() {
                 )}
                 style={{ width: cardW }}
               >
-                <img src={b.image} alt="" draggable={false} className="h-full w-full object-cover" />
+                <img
+                  src={b.image}
+                  alt=""
+                  draggable={false}
+                  className="h-full w-full object-cover object-center"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
                 <p className="absolute inset-x-0 bottom-0 truncate px-3 py-2.5 text-left text-[12px] font-bold text-white sm:text-[13px]">
                   {b.title}
