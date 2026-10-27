@@ -52,14 +52,16 @@ export function CornerWrapRibbon({
 }) {
   const w = 30
   const h = 48
-  const earW = 7
-  const earH = 9
-  const over = 7
+  const earW = 2.5 // very subtle outward flare
+  const earH = 7
+  const over = 3
   const right = 10
+  // tip nearly flush with the side — barely angled out
+  const tipDrop = over + 0.5
 
   return (
     <>
-      {/* BACK — fold ears + light wrap slivers (outside the ribbon width) */}
+      {/* BACK — fold ears flare outward (มุมเอียงออก) + light wrap slivers */}
       <svg
         aria-hidden
         className={cn('pointer-events-none absolute z-0', className)}
@@ -75,20 +77,20 @@ export function CornerWrapRibbon({
       >
         {/* Light slivers under the ears */}
         <path
-          d={`M${earW} ${over} L${earW - earW} ${over + earH} L${earW} ${over + earH * 0.55} Z`}
+          d={`M${earW} ${over} L${earW - earW * 0.85} ${over + earH} L${earW} ${over + earH * 0.5} Z`}
           fill="#f3f3f3"
         />
         <path
-          d={`M${earW + w} ${over} L${earW + w + earW} ${over + earH} L${earW + w} ${over + earH * 0.55} Z`}
+          d={`M${earW + w} ${over} L${earW + w + earW * 0.85} ${over + earH} L${earW + w} ${over + earH * 0.5} Z`}
           fill="#f3f3f3"
         />
-        {/* Dark fold ears — peek out left/right behind the face */}
+        {/* Dark fold ears — tip farther out so angle flares away from the ribbon */}
         <path
-          d={`M${earW} 0 L0 ${over + 2} L${earW} ${over + earH} Z`}
+          d={`M${earW} 0 L0 ${tipDrop} L${earW} ${over + earH} Z`}
           fill={fold}
         />
         <path
-          d={`M${earW + w} 0 L${earW * 2 + w} ${over + 2} L${earW + w} ${over + earH} Z`}
+          d={`M${earW + w} 0 L${earW * 2 + w} ${tipDrop} L${earW + w} ${over + earH} Z`}
           fill={fold}
         />
       </svg>
