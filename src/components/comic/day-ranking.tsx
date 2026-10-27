@@ -44,7 +44,7 @@ export function DayRanking({ className }: { className?: string }) {
 
                     {t.isOriginal ? (
                       <ComicTicketTag
-                        tone="special"
+                        tone="original"
                         className="absolute top-1.5 left-1.5 z-[1]"
                       >
                         ORIGINAL

@@ -56,8 +56,12 @@ export function TodayUpdates() {
                 <img src={t.cover} alt="" className="h-full w-full object-cover object-top" />
               </div>
               <div className="mt-2 space-y-0.5">
-                <span className="up-badge">UP</span>
-                <p className="line-clamp-2 text-[12px] font-bold leading-snug text-white">{t.title}</p>
+                <div className="flex min-w-0 items-center gap-1.5">
+                  <span className="up-badge shrink-0">UP</span>
+                  <p className="min-w-0 truncate text-[12px] font-bold leading-snug text-white">
+                    {t.title}
+                  </p>
+                </div>
                 <p className="flex items-center gap-1 text-[11px] text-white/55">
                   {t.chapter ?? 'Ep. 1'}
                   <Icon icon="lucide:book-marked" width={11} height={11} className="opacity-70" />
