@@ -84,7 +84,7 @@ export function CategoryRanking({ className, defaultTab = 'overall' }: CategoryR
 
   return (
     <section className={cn('relative bg-white', className)}>
-      <div className="relative mx-auto max-w-[1200px] px-4 py-8 md:px-6 md:py-10">
+      <div className="relative mx-auto max-w-[1200px] px-4 pt-3 pb-8 md:px-6 md:pt-4 md:pb-10">
         <span className="m1-watermark m1-watermark-light">RANK</span>
 
         <h2 className="relative font-display text-2xl font-extrabold text-[#111] md:text-3xl">

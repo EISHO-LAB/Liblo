@@ -15,7 +15,7 @@ export function DayRanking({ className }: { className?: string }) {
   return (
     <section className={cn('relative bg-white', className)}>
       {/* flex-1 grow from parent = scaled top space so slider+rank fill the screen */}
-      <div className="relative mx-auto mt-auto w-full max-w-[1200px] px-4 pt-5 pb-7 md:px-6 md:pt-6 md:pb-8">
+      <div className="relative mx-auto mt-auto w-full max-w-[1200px] px-4 pt-5 pb-3 md:px-6 md:pt-6 md:pb-4">
         <span className="m1-watermark m1-watermark-light">RANK</span>
 
         <div className="relative mb-4 flex flex-wrap items-end justify-between gap-2">

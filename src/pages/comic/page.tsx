@@ -2,6 +2,7 @@ import {
   CategoryRanking,
   DayRanking,
   HeroCarousel,
+  RankDivider,
   RecommendRail,
   TodayUpdates,
 } from '@/components/comic'
@@ -24,6 +25,7 @@ export function ComicPage() {
         <DayRanking className="flex min-h-0 flex-1 flex-col" />
       </div>
 
+      <RankDivider />
       <CategoryRanking />
 
       <TodayUpdates />
