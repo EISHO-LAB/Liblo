@@ -1,22 +1,26 @@
-import { CornerWrapRibbon, RankRibbonBadge } from '@/components/comic/rank-ribbon'
+import {
+  CornerWrapRibbon,
+  RankRibbonBadge,
+  RIBBON_NUM,
+} from '@/components/comic/rank-ribbon'
 import type { ComicTitle } from '@/data/comic'
+import { cn } from '@/lib/utils'
 
 type Props = {
   title: ComicTitle
   className?: string
 }
 
-type TopKind = 'TOP5' | 'TOP10' | 'TOP25'
-
-const TOP_TONE: Record<TopKind, { fill: string; fold: string }> = {
-  TOP5: { fill: '#e1203c', fold: '#9a1028' },
-  TOP10: { fill: '#e1203c', fold: '#9a1028' },
-  TOP25: { fill: '#5a5a5a', fold: '#2e2e2e' },
+/** Chart ladder tones — hot → warm → cool by reach */
+const TOP_TONE: Record<5 | 10 | 25, { fill: string; fold: string }> = {
+  5: { fill: '#e1203c', fold: '#9a1028' }, // LIBLO red — hottest
+  10: { fill: '#ff5a2e', fold: '#c23a14' }, // flame orange
+  25: { fill: '#5b6abf', fold: '#3a458a' }, // soft indigo
 }
 
 /**
  * Chart mark — vertical ribbon wrapping over cover top edge:
- * 1–3 gold/silver/bronze · 4–5 TOP5 · 6–10 TOP10 · 11–25 TOP25
+ * 1–3 gold/silver/bronze · 4–5 TOP/5 · 6–10 TOP/10 · 11–25 TOP/25
  */
 export function CoverChartBadge({ title, className }: Props) {
   const rank = title.chartRank
@@ -26,12 +30,15 @@ export function CoverChartBadge({ title, className }: Props) {
     return <RankRibbonBadge rank={rank} className={className} />
   }
 
-  const label: TopKind = rank <= 5 ? 'TOP5' : rank <= 10 ? 'TOP10' : 'TOP25'
-  const tone = TOP_TONE[label]
+  const n = (rank <= 5 ? 5 : rank <= 10 ? 10 : 25) as 5 | 10 | 25
+  const tone = TOP_TONE[n]
 
   return (
     <CornerWrapRibbon fill={tone.fill} fold={tone.fold} className={className}>
-      <span className="font-sans text-[7px] font-extrabold tracking-wide">{label}</span>
+      <span className="flex flex-col items-center leading-none">
+        <span className="font-display text-[7px] font-extrabold tracking-[0.08em]">TOP</span>
+        <span className={cn(RIBBON_NUM)}>{n}</span>
+      </span>
     </CornerWrapRibbon>
   )
 }

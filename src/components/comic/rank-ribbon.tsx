@@ -1,3 +1,4 @@
+import { Icon } from '@/components/icons/icon'
 import { cn } from '@/lib/utils'
 
 type Props = {
@@ -5,26 +6,16 @@ type Props = {
   className?: string
 }
 
+/** Medal tones — rich metallic fills + deeper fold ears */
 const TONE: Record<number, { fill: string; fold: string }> = {
-  1: { fill: '#f0c12e', fold: '#b8860b' },
-  2: { fill: '#c8c8c8', fold: '#8a8a8a' },
-  3: { fill: '#e08a3c', fold: '#a85a18' },
+  1: { fill: '#f5c518', fold: '#c49200' }, // gold
+  2: { fill: '#c0c4cc', fold: '#7a7e86' }, // silver
+  3: { fill: '#d4783a', fold: '#9a4a1c' }, // bronze
 }
 
-function Crown() {
-  return (
-    <svg viewBox="0 0 20 14" className="mb-px h-[7px] w-[10px]" aria-hidden>
-      <path
-        d="M2 12.5h16L16.2 5.2 12.5 9.2 10 3.2 7.5 9.2 3.8 5.2 2 12.5Z"
-        fill="#fff"
-        strokeLinejoin="round"
-      />
-      <circle cx="3.8" cy="5" r="1.1" fill="#fff" />
-      <circle cx="10" cy="3" r="1.2" fill="#fff" />
-      <circle cx="16.2" cy="5" r="1.1" fill="#fff" />
-    </svg>
-  )
-}
+/** Shared ribbon number style — same size + font for 1/2/3 and TOP 5/10/25 */
+export const RIBBON_NUM =
+  'font-display text-[16px] font-black leading-none tracking-tight'
 
 /**
  * Ribbon badge matching the reference wrap:
@@ -115,11 +106,11 @@ export function CornerWrapRibbon({
 
         <span
           className={cn(
-            'absolute inset-x-0 flex flex-col items-center justify-center gap-px',
-            'font-display text-[11px] font-black leading-none text-white',
+            'absolute inset-x-0 flex flex-col items-center justify-center',
+            'font-display font-black leading-none text-white',
             '[text-shadow:0_1px_1px_rgba(0,0,0,0.3)]',
           )}
-          style={{ top: over + 1, bottom: 13 }}
+          style={{ top: over + 3, bottom: 14 }}
         >
           {children}
         </span>
@@ -135,8 +126,17 @@ export function RankRibbonBadge({ rank, className }: Props) {
 
   return (
     <CornerWrapRibbon fill={tone.fill} fold={tone.fold} className={className}>
-      {rank === 1 ? <Crown /> : null}
-      {rank}
+      <span className="flex flex-col items-center leading-none">
+        {rank === 1 ? (
+          <Icon
+            icon="game-icons:queen-crown"
+            width={22}
+            height={14}
+            className="-mb-0.5 text-white"
+          />
+        ) : null}
+        <span className={RIBBON_NUM}>{rank}</span>
+      </span>
     </CornerWrapRibbon>
   )
 }
