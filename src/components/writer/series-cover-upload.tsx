@@ -1,4 +1,4 @@
-import { useRef, useState, type ChangeEvent, type DragEvent } from 'react'
+import { useRef, useState, type ChangeEvent } from 'react'
 import { Icon } from '@/components/icons/icon'
 import {
   COVER_KINDS,
@@ -41,7 +41,6 @@ function fileToDataUrl(file: File): Promise<string> {
 export function SeriesCoverUpload({ series, onSeriesChange }: Props) {
   const [active, setActive] = useState<CoverKind>('portrait')
   const [error, setError] = useState('')
-  const [dragOver, setDragOver] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const spec = coverKindSpec(active)
 
@@ -88,12 +87,6 @@ export function SeriesCoverUpload({ series, onSeriesChange }: Props) {
   function onInput(e: ChangeEvent<HTMLInputElement>) {
     void ingest(e.target.files?.[0])
     e.target.value = ''
-  }
-
-  function onDrop(e: DragEvent<HTMLLabelElement>) {
-    e.preventDefault()
-    setDragOver(false)
-    void ingest(e.dataTransfer.files?.[0])
   }
 
   function clearCover() {
@@ -164,14 +157,9 @@ export function SeriesCoverUpload({ series, onSeriesChange }: Props) {
               : `Upload ${spec.label.toLowerCase()}`
           }
           onClick={() => inputRef.current?.click()}
-          onDragOver={(e) => {
-            e.preventDefault()
-            setDragOver(true)
-          }}
-          onDragLeave={() => setDragOver(false)}
+          onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => {
             e.preventDefault()
-            setDragOver(false)
             void ingest(e.dataTransfer.files?.[0])
           }}
         >
@@ -216,26 +204,6 @@ export function SeriesCoverUpload({ series, onSeriesChange }: Props) {
               <dd>{spec.usedBy}</dd>
             </div>
           </dl>
-
-          <label
-            className={`writer-drop writer-cover-drop ${dragOver ? 'is-active' : ''}`}
-            onDragOver={(e) => {
-              e.preventDefault()
-              setDragOver(true)
-            }}
-            onDragLeave={() => setDragOver(false)}
-            onDrop={onDrop}
-            onClick={(e) => {
-              e.preventDefault()
-              inputRef.current?.click()
-            }}
-          >
-            <Icon icon="lucide:cloud-upload" width={24} height={24} className="text-brand-bright" />
-            <strong>Drop {spec.label.toLowerCase()} here</strong>
-            <span>
-              Exactly {spec.widthPx}×{spec.heightPx}px · {COVER_SPEC.formatLabels}
-            </span>
-          </label>
 
           <div className="writer-actions">
             <button

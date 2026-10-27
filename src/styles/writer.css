@@ -497,10 +497,6 @@ a.writer-episode-row:hover {
   max-width: 62%;
 }
 
-.writer-cover-drop {
-  min-height: 120px;
-}
-
 .writer-cover-ok {
   margin: 10px 0 0;
   color: #86efac;
