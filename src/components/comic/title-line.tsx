@@ -5,6 +5,8 @@ type Props = {
   title: ComicTitle
   /** Dark text for light backgrounds. */
   light?: boolean
+  /** Hide HOT chip (e.g. ranking boards — already “hot” by being listed). */
+  hideHot?: boolean
   className?: string
 }
 
@@ -12,7 +14,7 @@ type Props = {
  * Title row: UP or NEW SEASON (mutually exclusive) + HOT + truncated name.
  * Chart marks (#1–#7 ribbon / TOP pills) live on the cover — see CoverChartBadge.
  */
-export function ComicTitleLine({ title, light = false, className }: Props) {
+export function ComicTitleLine({ title, light = false, hideHot = false, className }: Props) {
   return (
     <div className={cn('flex min-w-0 items-center gap-1', className)}>
       {title.isNewSeason ? (
@@ -20,7 +22,9 @@ export function ComicTitleLine({ title, light = false, className }: Props) {
       ) : title.isUp ? (
         <span className="comic-chip comic-chip-up shrink-0">UP</span>
       ) : null}
-      {title.isHot ? <span className="comic-chip comic-chip-hot shrink-0">HOT</span> : null}
+      {!hideHot && title.isHot ? (
+        <span className="comic-chip comic-chip-hot shrink-0">HOT</span>
+      ) : null}
       <p
         className={cn(
           'min-w-0 truncate text-[12px] font-bold leading-snug',

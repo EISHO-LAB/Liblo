@@ -55,6 +55,7 @@ export function DayRanking({ className }: { className?: string }) {
                 <ComicTitleLine
                   title={t}
                   light
+                  hideHot
                   className="mt-3 text-[11px] sm:text-[12px]"
                 />
                 <ComicCardMeta title={t} light className="text-[10px]" />

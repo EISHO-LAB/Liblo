@@ -42,7 +42,7 @@ function RankRow({ title, rank }: { title: ComicTitle; rank: number }) {
         <ComicRankBadge rank={rank} className="!text-[1.35rem] -left-1.5" />
       </div>
       <div className="flex min-w-0 flex-1 flex-col justify-center gap-1 py-0.5">
-        <ComicTitleLine title={title} light className="text-[13px] font-extrabold" />
+        <ComicTitleLine title={title} light hideHot className="text-[13px] font-extrabold" />
         <p className="truncate text-[11px] leading-snug text-[#888]">{title.subtitle}</p>
         <p className="flex items-center gap-1.5 text-[10px] text-[#999]">
           <span className="truncate font-medium text-[#777]">{title.writer}</span>
@@ -129,7 +129,7 @@ export function CategoryRanking({ className, defaultTab = 'overall' }: CategoryR
                   <ComicRankBadge rank={1} className="!text-[2.4rem]" />
                 </div>
                 <div className="relative z-[1] mt-4 flex shrink-0 flex-col gap-1.5">
-                  <ComicTitleLine title={featured} light className="text-[15px] font-extrabold" />
+                  <ComicTitleLine title={featured} light hideHot className="text-[15px] font-extrabold" />
                   <p className="text-[12px] leading-snug text-[#888]">{featured.subtitle}</p>
                   <p className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-[#999]">
                     <span className="font-medium text-[#777]">{featured.writer}</span>

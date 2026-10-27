@@ -36,7 +36,7 @@ function RankRow({ title, rank }: { title: ComicTitle; rank: number }) {
         <ComicRankBadge rank={rank} className="!text-[1.35rem] -left-1.5" />
       </div>
       <div className="min-w-0 flex-1">
-        <ComicTitleLine title={title} light className="text-[14px] font-extrabold" />
+        <ComicTitleLine title={title} light hideHot className="text-[14px] font-extrabold" />
         <p className="mt-1 truncate text-[12px] text-[#888]">{title.subtitle}</p>
         <p className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-[#999]">
           <span className="truncate font-medium text-[#777]">{title.writer}</span>

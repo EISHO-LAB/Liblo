@@ -45,15 +45,15 @@ export function ComicPromoBadge({ tone, label, className }: Props) {
   )
 }
 
-/** Original per-rank promo map for comic hero ranking. */
+/** Per-rank cover promo for ranking boards — no HOT (board = already hot). */
 export const RANK_PROMO: Record<number, { tone: PromoTone; label: string }> = {
-  1: { tone: 'hot', label: 'HOT' },
+  1: { tone: 'free', label: 'FREE' },
   2: { tone: 'free', label: 'FREE' },
   3: { tone: 'deal', label: 'FREE' },
   4: { tone: 'free', label: 'FREE' },
   5: { tone: 'free', label: 'FREE' },
-  6: { tone: 'hot', label: 'HOT' },
-  7: { tone: 'hot', label: 'HOT' },
+  6: { tone: 'free', label: 'FREE' },
+  7: { tone: 'deal', label: 'FREE' },
 }
 
 /** @deprecated use RANK_PROMO — kept for older imports */
