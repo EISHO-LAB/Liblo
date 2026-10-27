@@ -49,12 +49,14 @@ export function RecommendRail({ title, watermark, items, light = false }: Props)
           </div>
         </div>
 
-        <div ref={ref} className="relative scrollbar-hide flex gap-4 overflow-x-auto pb-1">
+        <div ref={ref} className="relative scrollbar-hide flex gap-4 overflow-x-auto overflow-y-visible pt-2.5 pr-1 pb-1">
           {items.map((t) => (
             <Link key={t.id} to={comicTitleHref(t)} className="w-[148px] shrink-0 sm:w-[168px]">
-              <div className="relative aspect-[2/3] overflow-hidden rounded-lg">
-                <img src={t.cover} alt="" className="h-full w-full object-cover" />
-                {t.isOriginal ? <CoverOriginalBadge /> : null}
+              <div className="@container/cover relative isolate overflow-visible">
+                <div className="relative z-[1] aspect-[2/3] overflow-hidden rounded-lg">
+                  <img src={t.cover} alt="" className="h-full w-full object-cover" />
+                  {t.isOriginal ? <CoverOriginalBadge /> : null}
+                </div>
                 <CoverChartBadge title={t} />
               </div>
               <ComicTitleLine

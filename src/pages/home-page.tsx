@@ -145,8 +145,10 @@ export function HomePage() {
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-6">
             {comicCatalog.slice(0, 6).map((t) => (
               <Link key={t.id} to="/comic" className="min-w-0">
-                <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-[#2a2a2a]">
-                  <img src={t.cover} alt="" className="h-full w-full object-cover object-top" />
+                <div className="relative isolate overflow-visible pt-2 pr-1">
+                  <div className="relative z-[1] aspect-[3/4] overflow-hidden rounded-lg bg-[#2a2a2a]">
+                    <img src={t.cover} alt="" className="h-full w-full object-cover object-top" />
+                  </div>
                   {t.isOriginal ? <CoverOriginalBadge /> : null}
                   <CoverChartBadge title={t} />
                 </div>

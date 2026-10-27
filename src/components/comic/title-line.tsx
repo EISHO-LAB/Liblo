@@ -10,7 +10,7 @@ type Props = {
 
 /**
  * Title row: UP or NEW SEASON (mutually exclusive) + HOT + truncated name.
- * Chart badges (TOP 10 / TOP 25) live on the cover — see CoverChartBadge.
+ * Chart marks (#1–#7 ribbon / TOP pills) live on the cover — see CoverChartBadge.
  */
 export function ComicTitleLine({ title, light = false, className }: Props) {
   return (

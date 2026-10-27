@@ -1,4 +1,5 @@
 export { ComicRankBadge } from './rank-badge'
+export { RankRibbonBadge } from './rank-ribbon'
 export { ComicPromoBadge, RANK_PROMO, promoForRank } from './promo-badge'
 export { ComicTicketTag } from './ticket-tag'
 export { CoverChartBadge } from './cover-chart-badge'

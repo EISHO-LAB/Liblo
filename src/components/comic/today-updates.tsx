@@ -52,16 +52,18 @@ export function TodayUpdates() {
           ))}
         </div>
 
-        <div className="relative scrollbar-hide flex gap-3 overflow-x-auto pb-2">
+        <div className="relative scrollbar-hide flex gap-3 overflow-x-auto overflow-y-visible pt-2.5 pr-1 pb-2">
           {items.map((t) => (
             <Link
               key={`${day}-${t.id}`}
               to={comicTitleHref(t)}
               className="w-[128px] shrink-0 sm:w-[148px]"
             >
-              <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-[#2a2a2a]">
-                <img src={t.cover} alt="" className="h-full w-full object-cover object-top" />
-                {t.isOriginal ? <CoverOriginalBadge /> : null}
+              <div className="@container/cover relative isolate overflow-visible">
+                <div className="relative z-[1] aspect-[3/4] overflow-hidden rounded-lg bg-[#2a2a2a]">
+                  <img src={t.cover} alt="" className="h-full w-full object-cover object-top" />
+                  {t.isOriginal ? <CoverOriginalBadge /> : null}
+                </div>
                 <CoverChartBadge title={t} />
               </div>
               <div className="mt-2 space-y-0.5">
