@@ -1,5 +1,7 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { CoverChartBadge } from '@/components/comic/cover-chart-badge'
+import { ComicTitleLine } from '@/components/comic/title-line'
 import { Icon } from '@/components/icons/icon'
 import type { ComicTitle } from '@/data/comic'
 
@@ -48,14 +50,15 @@ export function RecommendRail({ title, watermark, items, light = false }: Props)
         <div ref={ref} className="relative scrollbar-hide flex gap-4 overflow-x-auto pb-1">
           {items.map((t) => (
             <Link key={t.id} to="/comic" className="w-[148px] shrink-0 sm:w-[168px]">
-              <div className="aspect-[2/3] overflow-hidden rounded-lg">
+              <div className="relative aspect-[2/3] overflow-hidden rounded-lg">
                 <img src={t.cover} alt="" className="h-full w-full object-cover" />
+                <CoverChartBadge title={t} />
               </div>
-              <p
-                className={`mt-2 line-clamp-1 text-[13px] font-extrabold ${light ? 'text-[#111]' : 'text-white'}`}
-              >
-                {t.title}
-              </p>
+              <ComicTitleLine
+                title={t}
+                light={light}
+                className="mt-2 text-[13px] font-extrabold"
+              />
               <p className={`line-clamp-1 text-[11px] ${light ? 'text-[#666]' : 'text-white/50'}`}>
                 {t.subtitle}
               </p>

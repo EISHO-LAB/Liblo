@@ -1,6 +1,8 @@
 export { ComicRankBadge } from './rank-badge'
 export { ComicPromoBadge, RANK_PROMO, promoForRank } from './promo-badge'
 export { ComicTicketTag } from './ticket-tag'
+export { CoverChartBadge } from './cover-chart-badge'
+export { ComicTitleLine } from './title-line'
 export { DayRanking } from './day-ranking'
 export { HeroCarousel } from './hero-carousel'
 export { RecommendRail } from './recommend-rail'

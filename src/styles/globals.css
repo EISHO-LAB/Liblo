@@ -130,18 +130,45 @@
     color: rgba(0, 0, 0, 0.06);
   }
 
-  .up-badge {
+  .up-badge,
+  .comic-chip {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     background: #e1203c;
     color: #fff;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 800;
     letter-spacing: 0.04em;
     padding: 1px 5px;
     border-radius: 2px;
     line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  .comic-chip-up {
+    background: #e1203c;
+  }
+
+  .comic-chip-season {
+    background: #2b5ce7;
+  }
+
+  .comic-chip-hot {
+    background: #f6334f;
+  }
+
+  .comic-chip-top10 {
+    background: #d4a017;
+    color: #111;
+    border: 2px solid #fff;
+    border-radius: 6px;
+  }
+
+  .comic-chip-top25 {
+    background: #5a5a5a;
+    border: 2px solid #fff;
+    border-radius: 6px;
   }
 
   .see-more-btn {

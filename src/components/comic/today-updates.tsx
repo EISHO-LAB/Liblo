@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { CoverChartBadge } from '@/components/comic/cover-chart-badge'
+import { ComicTitleLine } from '@/components/comic/title-line'
 import { Icon } from '@/components/icons/icon'
 import { catalog, days, todayKey } from '@/data/comic'
 import { cn } from '@/lib/utils'
@@ -52,16 +54,12 @@ export function TodayUpdates() {
         <div className="relative scrollbar-hide flex gap-3 overflow-x-auto pb-2">
           {items.map((t) => (
             <Link key={`${day}-${t.id}`} to="/comic" className="w-[128px] shrink-0 sm:w-[148px]">
-              <div className="aspect-[3/4] overflow-hidden rounded-lg bg-[#2a2a2a]">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-[#2a2a2a]">
                 <img src={t.cover} alt="" className="h-full w-full object-cover object-top" />
+                <CoverChartBadge title={t} />
               </div>
               <div className="mt-2 space-y-0.5">
-                <div className="flex min-w-0 items-center gap-1.5">
-                  <span className="up-badge shrink-0">UP</span>
-                  <p className="min-w-0 truncate text-[12px] font-bold leading-snug text-white">
-                    {t.title}
-                  </p>
-                </div>
+                <ComicTitleLine title={t} />
                 <p className="flex items-center gap-1 text-[11px] text-white/55">
                   {t.chapter ?? 'Ep. 1'}
                   <Icon icon="lucide:book-marked" width={11} height={11} className="opacity-70" />

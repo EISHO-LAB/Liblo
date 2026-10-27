@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { ComicPromoBadge, RANK_PROMO } from '@/components/comic/promo-badge'
 import { ComicRankBadge } from '@/components/comic/rank-badge'
 import { ComicTicketTag } from '@/components/comic/ticket-tag'
+import { ComicTitleLine } from '@/components/comic/title-line'
 import { Icon } from '@/components/icons/icon'
 import { rankingPool } from '@/data/comic'
 import { cn } from '@/lib/utils'
@@ -57,9 +58,11 @@ export function DayRanking({ className }: { className?: string }) {
                   <ComicRankBadge rank={rank} />
                 </div>
 
-                <p className="mt-3 truncate text-[11px] font-bold leading-snug text-[#333] sm:text-[12px]">
-                  {t.title}
-                </p>
+                <ComicTitleLine
+                  title={t}
+                  light
+                  className="mt-3 text-[11px] sm:text-[12px]"
+                />
               </Link>
             )
           })}
