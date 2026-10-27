@@ -127,14 +127,12 @@ export function RankRibbonBadge({ rank, className }: Props) {
   return (
     <CornerWrapRibbon fill={tone.fill} fold={tone.fold} className={className}>
       <span className="flex flex-col items-center leading-none">
-        {rank === 1 ? (
-          <Icon
-            icon="game-icons:queen-crown"
-            width={22}
-            height={14}
-            className="-mb-0.5 text-white"
-          />
-        ) : null}
+        <Icon
+          icon={rank === 1 ? 'game-icons:queen-crown' : 'mdi:crown'}
+          width={rank === 1 ? 22 : 20}
+          height={rank === 1 ? 14 : 13}
+          className="-mb-0.5 text-white"
+        />
         <span className={RIBBON_NUM}>{rank}</span>
       </span>
     </CornerWrapRibbon>
