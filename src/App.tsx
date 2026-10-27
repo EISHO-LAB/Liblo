@@ -6,7 +6,7 @@ import { SiteScrollbar } from '@/components/site-scrollbar'
 import { AuthProvider } from '@/lib/auth'
 import { AccountPage } from '@/pages/account-page'
 import { BrowsePage } from '@/pages/browse-page'
-import { ComicPage, ComicRankPage } from '@/pages/comic'
+import { ComicPage, ComicRankPage, ComicUpdatesPage } from '@/pages/comic'
 import { CoinsPage } from '@/pages/coins-page'
 import { CoinsPayPage } from '@/pages/coins-pay-page'
 import { HelpPage } from '@/pages/help-page'
@@ -75,16 +75,7 @@ function AppShell() {
           />
           <Route path="/coins" element={<CoinsPage />} />
           <Route path="/coins/pay" element={<CoinsPayPage />} />
-          <Route
-            path="/new"
-            element={
-              <BrowsePage
-                title="New & Popular"
-                categoryId="trending"
-                description="Trending on LIBLO right now"
-              />
-            }
-          />
+          <Route path="/new" element={<ComicUpdatesPage />} />
           <Route path="/search" element={<BrowsePage title="Search" description="Find a title" />} />
           <Route path="/my-list" element={<MyListPage />} />
           <Route path="/account" element={<AccountPage />} />
