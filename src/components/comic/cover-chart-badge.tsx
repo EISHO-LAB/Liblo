@@ -7,8 +7,8 @@ type Props = {
 }
 
 /**
- * TOP 10 / TOP 25 chip on the cover (top-left).
- * Not used in the weekly ranking section.
+ * MagaPocket-style TOP pill on the cover (top-right).
+ * Not used in weekly / category ranking (those use rank numerals).
  */
 export function CoverChartBadge({ title, className }: Props) {
   const rank = title.chartRank
@@ -19,12 +19,14 @@ export function CoverChartBadge({ title, className }: Props) {
   return (
     <span
       className={cn(
-        'comic-chip absolute top-1.5 left-1.5 z-[1]',
-        isTop10 ? 'comic-chip-top10' : 'comic-chip-top25',
+        'absolute top-1.5 right-1.5 z-[2] inline-flex items-center justify-center',
+        'rounded-full px-2 py-[3px] font-sans text-[9px] font-extrabold tracking-[0.04em] text-white',
+        'shadow-[0_1px_3px_rgba(0,0,0,0.35)]',
+        isTop10 ? 'bg-[#e1203c]' : 'bg-[#5a5a5a]',
         className,
       )}
     >
-      {isTop10 ? 'TOP 10' : 'TOP 25'}
+      {isTop10 ? 'TOP10' : 'TOP25'}
     </span>
   )
 }

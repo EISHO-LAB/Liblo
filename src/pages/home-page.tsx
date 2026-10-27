@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Icon } from '@/components/icons/icon'
-import { ComicTitleLine, CoverChartBadge } from '@/components/comic'
+import { ComicCardMeta, ComicTitleLine, CoverChartBadge, CoverOriginalBadge } from '@/components/comic'
 import { SiteFooter } from '@/components/layout'
 import { catalog as comicCatalog, heroBanners } from '@/data/comic'
 import { railFor } from '@/data/catalog'
@@ -147,10 +147,11 @@ export function HomePage() {
               <Link key={t.id} to="/comic" className="min-w-0">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-[#2a2a2a]">
                   <img src={t.cover} alt="" className="h-full w-full object-cover object-top" />
+                  {t.isOriginal ? <CoverOriginalBadge /> : null}
                   <CoverChartBadge title={t} />
                 </div>
                 <ComicTitleLine title={t} className="mt-2" />
-                <p className="text-[11px] text-white/45">{t.chapter ?? 'Ep. 1'}</p>
+                <ComicCardMeta title={t} />
               </Link>
             ))}
           </div>

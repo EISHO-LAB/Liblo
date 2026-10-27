@@ -12,7 +12,10 @@ export type ComicGenre =
 export type ComicTitle = {
   id: string
   title: string
+  /** Short pitch — used on genre ranking detail only. */
   subtitle: string
+  /** Creator credit shown under the title on cards. */
+  writer: string
   cover: string
   chapter?: string
   views: number
@@ -23,6 +26,21 @@ export type ComicTitle = {
   isHot?: boolean
   /** 1-based chart place by views — drives TOP 10 / TOP 25 chips (not shown in ranking). */
   chartRank?: number
+}
+
+/** Compact view score: 980 · 12.4k · 1.2m */
+export function formatViews(n: number): string {
+  if (n >= 1_000_000) {
+    const v = n / 1_000_000
+    const s = v >= 10 ? v.toFixed(0) : v.toFixed(1).replace(/\.0$/, '')
+    return `${s}m`
+  }
+  if (n >= 1_000) {
+    const v = n / 1_000
+    const s = v >= 100 ? v.toFixed(0) : v.toFixed(1).replace(/\.0$/, '')
+    return `${s}k`
+  }
+  return String(n)
 }
 
 /** @deprecated Prefer ComicTitle */
@@ -44,36 +62,36 @@ export const heroBanners = [
 ]
 
 const titles: Omit<ComicTitle, 'id' | 'chartRank'>[] = [
-  { title: 'Midnight Signal', subtitle: 'A late-night chat becomes destiny', cover: c(1), chapter: 'Ep. 42', views: 11949, genre: 'romance', isUp: true, isOriginal: true, isHot: true, isNewSeason: true },
-  { title: 'Rainy Roof', subtitle: 'Secrets on a wet city skyline', cover: c(2), chapter: 'Ep. 18', views: 9495, genre: 'drama', isUp: true, isHot: true },
-  { title: 'Glass Garden', subtitle: 'Crystal blooms that never sleep', cover: c(3), chapter: 'Ep. 7', views: 7597, genre: 'fantasy', isUp: true, isOriginal: true, isNewSeason: true },
-  { title: 'Blade Line', subtitle: 'One cut redraws the border', cover: c(4), chapter: 'Ep. 31', views: 4770, genre: 'action', isUp: true, isHot: true },
-  { title: 'Soft Orbit', subtitle: 'Two lives circling until gravity wins', cover: c(5), chapter: 'Ep. 12', views: 4228, genre: 'romance', isUp: true, isNewSeason: true },
-  { title: 'Harbor Ghost', subtitle: 'Fog hides what the ships left behind', cover: c(6), chapter: 'Ep. 9', views: 3881, genre: 'drama' },
-  { title: 'Office 12F', subtitle: 'Overtime turns into a second life', cover: c(7), chapter: 'Ep. 55', views: 3602, genre: 'comedy', isUp: true, isHot: true },
-  { title: 'Last Train', subtitle: 'The final carriage home', cover: c(8), chapter: 'Ep. 21', views: 3410, genre: 'drama' },
-  { title: 'Paper Hearts', subtitle: 'Letters that rewrite a year', cover: c(9), chapter: 'Vol. 3', views: 2988, genre: 'romance', isNewSeason: true },
-  { title: 'Nebula Diary', subtitle: 'A journal that opens another galaxy', cover: c(10), chapter: 'Ep. 4', views: 2771, genre: 'fantasy', isOriginal: true },
-  { title: 'Silent Panel', subtitle: 'Quiet frames of ordinary days', cover: c(11), chapter: 'Ep. 88', views: 2654, genre: 'drama', isUp: true },
-  { title: 'Orbit Letters', subtitle: 'Messages across the dark', cover: c(12), chapter: 'Ep. 16', views: 2501, genre: 'romance' },
-  { title: 'Cerberus Club', subtitle: 'Three heads, one secret crush', cover: c(13), chapter: 'Ep. 6', views: 2390, genre: 'comedy', isOriginal: true, isHot: true },
-  { title: 'Sunday Spirit', subtitle: 'Magazine legends, remixed', cover: c(14), chapter: 'Ep. 2', views: 2214, genre: 'action', isNewSeason: true },
-  { title: 'Coin Hunter', subtitle: 'Pay to play… or play to win', cover: c(15), chapter: 'Ep. 11', views: 2108, genre: 'comedy' },
-  { title: 'Fairytale Out', subtitle: 'One-shot festival winners', cover: c(16), chapter: 'One-shot', views: 1995, genre: 'fantasy' },
-  { title: 'Mob Pulse', subtitle: 'Power you never asked for', cover: c(17), chapter: 'Ep. 120', views: 1880, genre: 'action', isHot: true },
-  { title: 'Arena Ash', subtitle: 'Fight until the lights go out', cover: c(18), chapter: 'Ep. 67', views: 1766, genre: 'action' },
-  { title: 'Chao Bloom', subtitle: 'Girls’ manga, full sparkle', cover: c(19), chapter: 'Ep. 33', views: 1655, genre: 'romance' },
-  { title: 'Flower Court', subtitle: 'Romance behind palace doors', cover: c(20), chapter: 'Ep. 14', views: 1544, genre: 'romance', isNewSeason: true },
-  { title: 'Steel Sunday', subtitle: 'Weekly heroes assemble', cover: c(21), chapter: 'Ep. 201', views: 1433, genre: 'action' },
-  { title: 'Superior Edge', subtitle: 'Crime, heat, and late nights', cover: c(22), chapter: 'Ep. 45', views: 1322, genre: 'drama' },
-  { title: 'Spirit Walk', subtitle: 'Ghosts on the commute', cover: c(23), chapter: 'Ep. 8', views: 1211, genre: 'fantasy', isUp: true },
-  { title: 'Blue Ticket', subtitle: 'Win the trip of a lifetime', cover: c(24), chapter: 'Ep. 3', views: 1100, genre: 'comedy' },
-  { title: 'Mask Parade', subtitle: 'Who are you under it?', cover: c(25), chapter: 'Ep. 19', views: 998, genre: 'drama' },
-  { title: 'Kitchen Wars', subtitle: 'Recipes and rivalry', cover: c(26), chapter: 'Ep. 27', views: 887, genre: 'comedy' },
-  { title: 'Neon Tutor', subtitle: 'Study sessions after dark', cover: c(27), chapter: 'Ep. 10', views: 776, genre: 'romance', isOriginal: true },
-  { title: 'Drift School', subtitle: 'First love, last period', cover: c(28), chapter: 'Ep. 5', views: 665, genre: 'romance' },
-  { title: 'Crown Debt', subtitle: 'Royalty with a price tag', cover: c(29), chapter: 'Ep. 22', views: 554, genre: 'fantasy' },
-  { title: 'Pixel Heart', subtitle: 'Game world, real feelings', cover: c(30), chapter: 'Ep. 41', views: 443, genre: 'comedy' },
+  { title: 'Midnight Signal', subtitle: 'A late-night chat becomes destiny', writer: 'Rina Vale', cover: c(1), chapter: 'Ep. 42', views: 2_450_000, genre: 'romance', isUp: true, isOriginal: true, isHot: true, isNewSeason: true },
+  { title: 'Rainy Roof', subtitle: 'Secrets on a wet city skyline', writer: 'Ken Mori', cover: c(2), chapter: 'Ep. 18', views: 1_180_000, genre: 'drama', isUp: true, isHot: true },
+  { title: 'Glass Garden', subtitle: 'Crystal blooms that never sleep', writer: 'Aya Frost', cover: c(3), chapter: 'Ep. 7', views: 890_000, genre: 'fantasy', isUp: true, isOriginal: true, isNewSeason: true },
+  { title: 'Blade Line', subtitle: 'One cut redraws the border', writer: 'Jin Park', cover: c(4), chapter: 'Ep. 31', views: 512_000, genre: 'action', isUp: true, isHot: true },
+  { title: 'Soft Orbit', subtitle: 'Two lives circling until gravity wins', writer: 'Mia Chen', cover: c(5), chapter: 'Ep. 12', views: 348_000, genre: 'romance', isUp: true, isNewSeason: true },
+  { title: 'Harbor Ghost', subtitle: 'Fog hides what the ships left behind', writer: 'Leo Hart', cover: c(6), chapter: 'Ep. 9', views: 276_000, genre: 'drama' },
+  { title: 'Office 12F', subtitle: 'Overtime turns into a second life', writer: 'Sora Kim', cover: c(7), chapter: 'Ep. 55', views: 198_000, genre: 'comedy', isUp: true, isHot: true },
+  { title: 'Last Train', subtitle: 'The final carriage home', writer: 'Noah Lee', cover: c(8), chapter: 'Ep. 21', views: 154_000, genre: 'drama' },
+  { title: 'Paper Hearts', subtitle: 'Letters that rewrite a year', writer: 'Yui Sato', cover: c(9), chapter: 'Vol. 3', views: 121_000, genre: 'romance', isNewSeason: true },
+  { title: 'Nebula Diary', subtitle: 'A journal that opens another galaxy', writer: 'Kai Nova', cover: c(10), chapter: 'Ep. 4', views: 98_500, genre: 'fantasy', isOriginal: true },
+  { title: 'Silent Panel', subtitle: 'Quiet frames of ordinary days', writer: 'Hana Ide', cover: c(11), chapter: 'Ep. 88', views: 76_200, genre: 'drama', isUp: true },
+  { title: 'Orbit Letters', subtitle: 'Messages across the dark', writer: 'Eli Quinn', cover: c(12), chapter: 'Ep. 16', views: 64_800, genre: 'romance' },
+  { title: 'Cerberus Club', subtitle: 'Three heads, one secret crush', writer: 'LIBLO Studio', cover: c(13), chapter: 'Ep. 6', views: 52_400, genre: 'comedy', isOriginal: true, isHot: true },
+  { title: 'Sunday Spirit', subtitle: 'Magazine legends, remixed', writer: 'Taro Mag', cover: c(14), chapter: 'Ep. 2', views: 41_900, genre: 'action', isNewSeason: true },
+  { title: 'Coin Hunter', subtitle: 'Pay to play… or play to win', writer: 'Rex Coin', cover: c(15), chapter: 'Ep. 11', views: 33_600, genre: 'comedy' },
+  { title: 'Fairytale Out', subtitle: 'One-shot festival winners', writer: 'Luna Reed', cover: c(16), chapter: 'One-shot', views: 28_100, genre: 'fantasy' },
+  { title: 'Mob Pulse', subtitle: 'Power you never asked for', writer: 'Vin Cross', cover: c(17), chapter: 'Ep. 120', views: 22_700, genre: 'action', isHot: true },
+  { title: 'Arena Ash', subtitle: 'Fight until the lights go out', writer: 'Ash Kane', cover: c(18), chapter: 'Ep. 67', views: 18_400, genre: 'action' },
+  { title: 'Chao Bloom', subtitle: 'Girls’ manga, full sparkle', writer: 'Ploy Chao', cover: c(19), chapter: 'Ep. 33', views: 14_900, genre: 'romance' },
+  { title: 'Flower Court', subtitle: 'Romance behind palace doors', writer: 'Iris Thorn', cover: c(20), chapter: 'Ep. 14', views: 12_200, genre: 'romance', isNewSeason: true },
+  { title: 'Steel Sunday', subtitle: 'Weekly heroes assemble', writer: 'Max Steel', cover: c(21), chapter: 'Ep. 201', views: 9_850, genre: 'action' },
+  { title: 'Superior Edge', subtitle: 'Crime, heat, and late nights', writer: 'Dane Voss', cover: c(22), chapter: 'Ep. 45', views: 7_640, genre: 'drama' },
+  { title: 'Spirit Walk', subtitle: 'Ghosts on the commute', writer: 'Nori Shade', cover: c(23), chapter: 'Ep. 8', views: 5_210, genre: 'fantasy', isUp: true },
+  { title: 'Blue Ticket', subtitle: 'Win the trip of a lifetime', writer: 'Sky Blue', cover: c(24), chapter: 'Ep. 3', views: 3_880, genre: 'comedy' },
+  { title: 'Mask Parade', subtitle: 'Who are you under it?', writer: 'Vera Mask', cover: c(25), chapter: 'Ep. 19', views: 2_450, genre: 'drama' },
+  { title: 'Kitchen Wars', subtitle: 'Recipes and rivalry', writer: 'Chef Jun', cover: c(26), chapter: 'Ep. 27', views: 1_620, genre: 'comedy' },
+  { title: 'Neon Tutor', subtitle: 'Study sessions after dark', writer: 'Mika Neon', cover: c(27), chapter: 'Ep. 10', views: 980, genre: 'romance', isOriginal: true },
+  { title: 'Drift School', subtitle: 'First love, last period', writer: 'Ren Drift', cover: c(28), chapter: 'Ep. 5', views: 740, genre: 'romance' },
+  { title: 'Crown Debt', subtitle: 'Royalty with a price tag', writer: 'Crown & Co.', cover: c(29), chapter: 'Ep. 22', views: 520, genre: 'fantasy' },
+  { title: 'Pixel Heart', subtitle: 'Game world, real feelings', writer: 'Pix Ell', cover: c(30), chapter: 'Ep. 41', views: 310, genre: 'comedy' },
 ]
 
 const withIds: ComicTitle[] = titles.map((t, i) => ({

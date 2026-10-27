@@ -9,11 +9,13 @@
  */
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { CoverOriginalBadge } from '@/components/comic/cover-original-badge'
 import { ComicPromoBadge, RANK_PROMO } from '@/components/comic/promo-badge'
 import { ComicRankBadge } from '@/components/comic/rank-badge'
-import { ComicTicketTag } from '@/components/comic/ticket-tag'
 import { ComicTitleLine } from '@/components/comic/title-line'
+import { Icon } from '@/components/icons/icon'
 import {
+  formatViews,
   RANKING_PREVIEW,
   rankingForTab,
   rankingTabs,
@@ -33,11 +35,7 @@ function RankRow({ title, rank }: { title: ComicTitle; rank: number }) {
       <div className="relative w-[72px] shrink-0 overflow-visible">
         <div className="relative aspect-square overflow-hidden rounded-md bg-[#eee]">
           <img src={title.cover} alt="" className="h-full w-full object-cover object-top" />
-          {title.isOriginal ? (
-            <ComicTicketTag tone="original" className="absolute top-1 left-1 z-[1] scale-90">
-              ORIGINAL
-            </ComicTicketTag>
-          ) : null}
+          {title.isOriginal ? <CoverOriginalBadge className="top-1 left-1 scale-90" /> : null}
           {promo ? <ComicPromoBadge tone={promo.tone} label={promo.label} /> : null}
         </div>
         <ComicRankBadge rank={rank} className="!text-[1.35rem] -left-1.5" />
@@ -45,8 +43,13 @@ function RankRow({ title, rank }: { title: ComicTitle; rank: number }) {
       <div className="min-w-0 flex-1 pb-1">
         <ComicTitleLine title={title} light className="text-[13px] font-extrabold" />
         <p className="mt-0.5 truncate text-[11px] font-semibold text-m1">{title.subtitle}</p>
-        <p className="mt-1 text-[10px] text-[#999]">
-          {title.chapter ?? 'Ep. 1'} · {title.views.toLocaleString()} views
+        <p className="mt-1 inline-flex items-center gap-1 text-[10px] text-[#999]">
+          {title.chapter ?? 'Ep. 1'}
+          <span className="text-[#ccc]">·</span>
+          <span className="inline-flex items-center gap-0.5">
+            <Icon icon="lucide:eye" width={10} height={10} />
+            {formatViews(title.views)}
+          </span>
         </p>
       </div>
     </Link>
@@ -122,14 +125,7 @@ export function CategoryRanking({ className, defaultTab = 'overall' }: CategoryR
                       alt=""
                       className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.02]"
                     />
-                    {featured.isOriginal ? (
-                      <ComicTicketTag
-                        tone="original"
-                        className="absolute top-1.5 left-1.5 z-[1]"
-                      >
-                        ORIGINAL
-                      </ComicTicketTag>
-                    ) : null}
+                    {featured.isOriginal ? <CoverOriginalBadge /> : null}
                     {featuredPromo ? (
                       <ComicPromoBadge tone={featuredPromo.tone} label={featuredPromo.label} />
                     ) : null}
@@ -139,8 +135,13 @@ export function CategoryRanking({ className, defaultTab = 'overall' }: CategoryR
                 <div className="relative z-[1] mt-5 shrink-0">
                   <ComicTitleLine title={featured} light className="text-[15px] font-extrabold" />
                   <p className="mt-1 text-[12px] font-semibold text-m1">{featured.subtitle}</p>
-                  <p className="mt-1 text-[11px] text-[#999]">
-                    {featured.chapter ?? 'Ep. 1'} · {featured.views.toLocaleString()} views
+                  <p className="mt-1 inline-flex items-center gap-1 text-[11px] text-[#999]">
+                    {featured.chapter ?? 'Ep. 1'}
+                    <span className="text-[#ccc]">·</span>
+                    <span className="inline-flex items-center gap-0.5">
+                      <Icon icon="lucide:eye" width={11} height={11} />
+                      {formatViews(featured.views)}
+                    </span>
                   </p>
                   <p className="mt-2 line-clamp-2 text-[12px] leading-relaxed text-[#666] lg:line-clamp-3">
                     {featured.subtitle}. Keep reading on LIBLO — new episodes drop regularly.

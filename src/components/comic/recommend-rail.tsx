@@ -1,6 +1,8 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { ComicCardMeta } from '@/components/comic/card-meta'
 import { CoverChartBadge } from '@/components/comic/cover-chart-badge'
+import { CoverOriginalBadge } from '@/components/comic/cover-original-badge'
 import { ComicTitleLine } from '@/components/comic/title-line'
 import { Icon } from '@/components/icons/icon'
 import type { ComicTitle } from '@/data/comic'
@@ -52,6 +54,7 @@ export function RecommendRail({ title, watermark, items, light = false }: Props)
             <Link key={t.id} to="/comic" className="w-[148px] shrink-0 sm:w-[168px]">
               <div className="relative aspect-[2/3] overflow-hidden rounded-lg">
                 <img src={t.cover} alt="" className="h-full w-full object-cover" />
+                {t.isOriginal ? <CoverOriginalBadge /> : null}
                 <CoverChartBadge title={t} />
               </div>
               <ComicTitleLine
@@ -59,15 +62,7 @@ export function RecommendRail({ title, watermark, items, light = false }: Props)
                 light={light}
                 className="mt-2 text-[13px] font-extrabold"
               />
-              <p className={`line-clamp-1 text-[11px] ${light ? 'text-[#666]' : 'text-white/50'}`}>
-                {t.subtitle}
-              </p>
-              <p
-                className={`mt-1 flex items-center justify-end gap-1 text-[11px] ${light ? 'text-[#888]' : 'text-white/40'}`}
-              >
-                <Icon icon="lucide:megaphone" width={12} height={12} />
-                {t.views.toLocaleString()}
-              </p>
+              <ComicCardMeta title={t} light={light} />
             </Link>
           ))}
         </div>

@@ -148,27 +148,36 @@
 
   .comic-chip-up {
     background: #e1203c;
+    border-radius: 2px;
+    min-width: 1.35em;
+    padding: 1px 4px;
   }
 
   .comic-chip-season {
-    background: #2b5ce7;
+    background: #e1203c;
+    border-radius: 2px;
+    min-width: 1.35em;
+    padding: 1px 5px;
   }
 
   .comic-chip-hot {
     background: #f6334f;
+    border-radius: 2px;
   }
 
+  /* Cover TOP pills use CoverChartBadge — keep legacy chip classes for safety */
   .comic-chip-top10 {
-    background: #d4a017;
-    color: #111;
-    border: 2px solid #fff;
-    border-radius: 6px;
+    background: #e1203c;
+    color: #fff;
+    border-radius: 999px;
+    padding: 3px 8px;
   }
 
   .comic-chip-top25 {
     background: #5a5a5a;
-    border: 2px solid #fff;
-    border-radius: 6px;
+    color: #fff;
+    border-radius: 999px;
+    padding: 3px 8px;
   }
 
   .see-more-btn {

@@ -16,7 +16,7 @@ export function ComicTitleLine({ title, light = false, className }: Props) {
   return (
     <div className={cn('flex min-w-0 items-center gap-1', className)}>
       {title.isNewSeason ? (
-        <span className="comic-chip comic-chip-season shrink-0">NEW SEASON</span>
+        <span className="comic-chip comic-chip-season shrink-0">N</span>
       ) : title.isUp ? (
         <span className="comic-chip comic-chip-up shrink-0">UP</span>
       ) : null}

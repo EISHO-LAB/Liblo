@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ComicCardMeta } from '@/components/comic/card-meta'
 import { CoverChartBadge } from '@/components/comic/cover-chart-badge'
+import { CoverOriginalBadge } from '@/components/comic/cover-original-badge'
 import { ComicTitleLine } from '@/components/comic/title-line'
-import { Icon } from '@/components/icons/icon'
 import { catalog, days, todayKey } from '@/data/comic'
 import { cn } from '@/lib/utils'
 
@@ -56,14 +57,12 @@ export function TodayUpdates() {
             <Link key={`${day}-${t.id}`} to="/comic" className="w-[128px] shrink-0 sm:w-[148px]">
               <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-[#2a2a2a]">
                 <img src={t.cover} alt="" className="h-full w-full object-cover object-top" />
+                {t.isOriginal ? <CoverOriginalBadge /> : null}
                 <CoverChartBadge title={t} />
               </div>
               <div className="mt-2 space-y-0.5">
                 <ComicTitleLine title={t} />
-                <p className="flex items-center gap-1 text-[11px] text-white/55">
-                  {t.chapter ?? 'Ep. 1'}
-                  <Icon icon="lucide:book-marked" width={11} height={11} className="opacity-70" />
-                </p>
+                <ComicCardMeta title={t} />
               </div>
             </Link>
           ))}

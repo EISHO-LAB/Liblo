@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
+import { ComicCardMeta } from '@/components/comic/card-meta'
+import { CoverOriginalBadge } from '@/components/comic/cover-original-badge'
 import { ComicPromoBadge, RANK_PROMO } from '@/components/comic/promo-badge'
 import { ComicRankBadge } from '@/components/comic/rank-badge'
-import { ComicTicketTag } from '@/components/comic/ticket-tag'
 import { ComicTitleLine } from '@/components/comic/title-line'
 import { Icon } from '@/components/icons/icon'
 import { rankingPool } from '@/data/comic'
@@ -43,14 +44,7 @@ export function DayRanking({ className }: { className?: string }) {
                       className="h-full w-full object-cover object-top"
                     />
 
-                    {t.isOriginal ? (
-                      <ComicTicketTag
-                        tone="original"
-                        className="absolute top-1.5 left-1.5 z-[1]"
-                      >
-                        ORIGINAL
-                      </ComicTicketTag>
-                    ) : null}
+                    {t.isOriginal ? <CoverOriginalBadge /> : null}
 
                     {promo ? <ComicPromoBadge tone={promo.tone} label={promo.label} /> : null}
                   </div>
@@ -63,6 +57,7 @@ export function DayRanking({ className }: { className?: string }) {
                   light
                   className="mt-3 text-[11px] sm:text-[12px]"
                 />
+                <ComicCardMeta title={t} light className="text-[10px]" />
               </Link>
             )
           })}
