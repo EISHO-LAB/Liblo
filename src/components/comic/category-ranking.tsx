@@ -31,7 +31,7 @@ function RankRow({ title, rank }: { title: ComicTitle; rank: number }) {
   return (
     <Link
       to={comicTitleHref(title)}
-      className="flex h-full min-h-0 items-center gap-3 border-b border-black/8 py-2.5 last:border-b-0 hover:bg-black/[0.02]"
+      className="flex h-full min-h-0 items-start gap-3 border-b border-black/8 py-2.5 last:border-b-0 hover:bg-black/[0.02]"
     >
       <div className="relative w-[72px] shrink-0 overflow-visible">
         <div className="relative aspect-square overflow-hidden rounded-md bg-[#eee]">
@@ -41,13 +41,13 @@ function RankRow({ title, rank }: { title: ComicTitle; rank: number }) {
         </div>
         <ComicRankBadge rank={rank} className="!text-[1.35rem] -left-1.5" />
       </div>
-      <div className="min-w-0 flex-1 pb-1">
+      <div className="flex min-w-0 flex-1 flex-col justify-center gap-1 py-0.5">
         <ComicTitleLine title={title} light className="text-[13px] font-extrabold" />
-        <p className="mt-0.5 truncate text-[11px] font-semibold text-m1">{title.subtitle}</p>
-        <p className="mt-1 inline-flex items-center gap-1 text-[10px] text-[#999]">
-          {title.chapter ?? 'Ep. 1'}
-          <span className="text-[#ccc]">·</span>
-          <span className="inline-flex items-center gap-0.5">
+        <p className="truncate text-[11px] leading-snug text-[#888]">{title.subtitle}</p>
+        <p className="flex items-center gap-1.5 text-[10px] text-[#999]">
+          <span className="truncate font-medium text-[#777]">{title.writer}</span>
+          <span className="text-[#ddd]">·</span>
+          <span className="inline-flex shrink-0 items-center gap-0.5">
             <Icon icon="lucide:eye" width={10} height={10} />
             {formatViews(title.views)}
           </span>
@@ -66,25 +66,17 @@ export type CategoryRankingProps = {
 /**
  * Standalone ranking section:
  * - Tabs: Overall · Original · New · Action · Romance · Fantasy · Drama · Comedy
- * - Layout: #1 featured (narrow col) + #2–10 three-column list (equal height)
- * - Expand to Top 25 via See more
- * - Original LIBLO badges (rank numeral, ORIGINAL, HOT/FREE)
+ * - Layout: #1 featured + #2–10 grid
+ * - See more → /comic/rank
  */
 export function CategoryRanking({ className, defaultTab = 'overall' }: CategoryRankingProps) {
   const [tab, setTab] = useState<RankingTabKey>(defaultTab)
-  const [expanded, setExpanded] = useState(false)
 
   const all = useMemo(() => rankingForTab(tab), [tab])
-  const visible = expanded ? all : all.slice(0, RANKING_PREVIEW)
+  const visible = all.slice(0, RANKING_PREVIEW)
   const featured = visible[0]
   const rest = visible.slice(1)
-  const canExpand = all.length > RANKING_PREVIEW
   const featuredPromo = RANK_PROMO[1]
-
-  const onTab = (key: RankingTabKey) => {
-    setTab(key)
-    setExpanded(false)
-  }
 
   return (
     <section className={cn('relative bg-white', className)}>
@@ -100,7 +92,7 @@ export function CategoryRanking({ className, defaultTab = 'overall' }: CategoryR
             <button
               key={t.key}
               type="button"
-              onClick={() => onTab(t.key)}
+              onClick={() => setTab(t.key)}
               className={cn(
                 'shrink-0 cursor-pointer px-3 py-2.5 text-[12px] font-bold transition sm:text-[13px]',
                 tab === t.key
@@ -136,18 +128,20 @@ export function CategoryRanking({ className, defaultTab = 'overall' }: CategoryR
                   </div>
                   <ComicRankBadge rank={1} className="!text-[2.4rem]" />
                 </div>
-                <div className="relative z-[1] mt-5 shrink-0">
+                <div className="relative z-[1] mt-4 flex shrink-0 flex-col gap-1.5">
                   <ComicTitleLine title={featured} light className="text-[15px] font-extrabold" />
-                  <p className="mt-1 text-[12px] font-semibold text-m1">{featured.subtitle}</p>
-                  <p className="mt-1 inline-flex items-center gap-1 text-[11px] text-[#999]">
-                    {featured.chapter ?? 'Ep. 1'}
-                    <span className="text-[#ccc]">·</span>
+                  <p className="text-[12px] leading-snug text-[#888]">{featured.subtitle}</p>
+                  <p className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-[#999]">
+                    <span className="font-medium text-[#777]">{featured.writer}</span>
+                    <span className="text-[#ddd]">·</span>
+                    <span>{featured.chapter ?? 'Ep. 1'}</span>
+                    <span className="text-[#ddd]">·</span>
                     <span className="inline-flex items-center gap-0.5">
                       <Icon icon="lucide:eye" width={11} height={11} />
                       {formatViews(featured.views)}
                     </span>
                   </p>
-                  <p className="mt-2 line-clamp-2 text-[12px] leading-relaxed text-[#666] lg:line-clamp-3">
+                  <p className="mt-1 line-clamp-2 text-[12px] leading-relaxed text-[#999] lg:line-clamp-3">
                     {featured.subtitle}. Keep reading on LIBLO — new episodes drop regularly.
                   </p>
                 </div>
@@ -162,25 +156,15 @@ export function CategoryRanking({ className, defaultTab = 'overall' }: CategoryR
               </div>
             </div>
 
-            {expanded && rest.length > 9 ? (
-              <div className="relative mt-2 grid gap-x-3 border-t border-black/8 pt-2 sm:grid-cols-2 lg:grid-cols-3">
-                {rest.slice(9).map((t, i) => (
-                  <RankRow key={t.id} title={t} rank={i + 11} />
-                ))}
-              </div>
-            ) : null}
-
-            {canExpand ? (
-              <div className="relative mt-8 flex justify-center">
-                <button
-                  type="button"
-                  onClick={() => setExpanded((v) => !v)}
-                  className="w-full max-w-md cursor-pointer rounded-lg border-2 border-m1 bg-white py-3 text-[13px] font-bold text-m1 transition hover:bg-m1 hover:text-white"
-                >
-                  {expanded ? 'Show less' : `See more · Top ${all.length}`}
-                </button>
-              </div>
-            ) : null}
+            <div className="relative mt-8 flex justify-center">
+              <Link
+                to={`/comic/rank?tab=${tab}`}
+                className="flex w-full max-w-md cursor-pointer items-center justify-center gap-2 rounded-lg border-2 border-m1 bg-white py-3 text-[13px] font-bold text-m1 transition hover:bg-m1 hover:text-white"
+              >
+                See more · Top {all.length}
+                <Icon icon="lucide:chevron-right" width={16} height={16} />
+              </Link>
+            </div>
           </>
         )}
       </div>

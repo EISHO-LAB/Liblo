@@ -6,7 +6,7 @@ import { SiteScrollbar } from '@/components/site-scrollbar'
 import { AuthProvider } from '@/lib/auth'
 import { AccountPage } from '@/pages/account-page'
 import { BrowsePage } from '@/pages/browse-page'
-import { ComicPage } from '@/pages/comic'
+import { ComicPage, ComicRankPage } from '@/pages/comic'
 import { CoinsPage } from '@/pages/coins-page'
 import { CoinsPayPage } from '@/pages/coins-pay-page'
 import { HelpPage } from '@/pages/help-page'
@@ -42,6 +42,7 @@ function AppShell() {
         <Route element={<RequireAuth />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/comic" element={<ComicPage />} />
+          <Route path="/comic/rank" element={<ComicRankPage />} />
           <Route path="/scroll" element={<Navigate to="/comic" replace />} />
           <Route path="/titles" element={<BrowsePage title="Title list" description="All series" />} />
           <Route
