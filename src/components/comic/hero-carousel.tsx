@@ -101,15 +101,17 @@ export function HeroCarousel() {
   const current = heroBanners[logical]!
 
   return (
-    <section className="relative overflow-hidden pt-[64px] lg:pt-[76px]">
+    <section className="relative overflow-hidden bg-[#141414] pt-[64px] lg:pt-[76px]">
       <div className="pointer-events-none absolute inset-0">
         <img
           key={current.id}
           src={current.image}
           alt=""
-          className="h-full w-full scale-110 object-cover opacity-35 blur-2xl"
+          className="h-full w-full scale-110 object-cover opacity-25 blur-2xl"
         />
-        <div className="absolute inset-0 bg-[#111]/72" />
+        <div className="absolute inset-0 bg-[#141414]/70" />
+        {/* Same dotted field as updates / dark rails */}
+        <div className="absolute inset-0 m1-dot-pattern" />
       </div>
 
       <div className="relative pt-5 pb-5 md:pt-7 md:pb-7">

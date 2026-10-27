@@ -22,7 +22,7 @@ export function TodayUpdates() {
 
   return (
     <section className="relative m1-dot-bg">
-      <div className="relative mx-auto max-w-[1200px] px-4 py-8 md:px-6">
+      <div className="relative mx-auto max-w-[1200px] px-4 pt-8 pb-12 md:px-6 md:pt-10 md:pb-14">
         <span className="m1-watermark">UPDATE</span>
 
         <div className="relative mb-3 flex items-center justify-between gap-3">
@@ -35,24 +35,21 @@ export function TodayUpdates() {
           </Link>
         </div>
 
-        {/* Same day filter as ranking used */}
-        <div className="relative mb-4 flex overflow-hidden rounded-lg bg-[#2a2a2a]">
+        {/* Comic ticket day filter — notches + dotted dividers */}
+        <div className="day-ticket-row relative mb-5">
           {days.map((x) => (
             <button
               key={x.key}
               type="button"
               onClick={() => setDay(x.key)}
-              className={cn(
-                'flex-1 cursor-pointer py-2.5 text-center text-[12px] font-extrabold transition sm:text-sm',
-                day === x.key ? 'bg-m1 text-white' : 'text-white/70 hover:text-white',
-              )}
+              className={cn('day-ticket', day === x.key && 'day-ticket-active')}
             >
               {x.label}
             </button>
           ))}
         </div>
 
-        <div className="relative scrollbar-hide flex gap-3 overflow-x-auto overflow-y-visible pt-2.5 pr-1 pb-2">
+        <div className="relative scrollbar-hide flex gap-3 overflow-x-auto overflow-y-visible pt-2.5 pr-1 pb-1">
           {items.map((t) => (
             <Link
               key={`${day}-${t.id}`}
@@ -60,7 +57,7 @@ export function TodayUpdates() {
               className="w-[128px] shrink-0 sm:w-[148px]"
             >
               <div className="@container/cover relative isolate overflow-visible">
-                <div className="relative z-[1] aspect-[3/4] overflow-hidden rounded-lg bg-[#2a2a2a]">
+                <div className="relative z-[1] aspect-[3/4] overflow-hidden rounded-lg bg-[#1c1c1c] ring-1 ring-white/6">
                   <img src={t.cover} alt="" className="h-full w-full object-cover object-top" />
                   {t.isOriginal ? <CoverOriginalBadge /> : null}
                 </div>

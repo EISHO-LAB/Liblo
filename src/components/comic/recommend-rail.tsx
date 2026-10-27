@@ -22,7 +22,7 @@ export function RecommendRail({ title, watermark, items, light = false }: Props)
 
   return (
     <section
-      className={`relative mt-10 py-8 ${light ? 'bg-[#f2f2f2] text-[#111]' : 'bg-transparent text-white'}`}
+      className={`relative py-10 ${light ? 'bg-[#f2f2f2] text-[#111]' : 'm1-dot-bg text-white'}`}
     >
       <div className="relative mx-auto max-w-[1200px] px-4 md:px-6">
         <span className={`m1-watermark ${light ? 'm1-watermark-light' : ''}`}>{watermark}</span>

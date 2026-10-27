@@ -105,10 +105,102 @@
 }
 
 @layer components {
+  /* Shared dark dotted field — hero, updates, rails */
   .m1-dot-bg {
-    background-color: #1a1a1a;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-    background-size: 6px 6px;
+    background-color: #141414;
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1.15px
+    );
+    background-size: 8px 8px;
+    background-position: 0 0;
+  }
+
+  /* Dots only — layer over photo washes (same size/opacity as .m1-dot-bg) */
+  .m1-dot-pattern {
+    background-color: transparent;
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1.15px
+    );
+    background-size: 8px 8px;
+    background-position: 0 0;
+  }
+
+  /*
+   * Comic ticket day filter — notched corners, flush row,
+   * dotted vertical perforations between days.
+   */
+  .day-ticket-row {
+    display: flex;
+    overflow: hidden;
+    border: 2px solid #1a0505;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
+  }
+
+  .day-ticket {
+    --notch: 4px;
+    --ticket: #8b1e2d;
+    --cut: #141414;
+    position: relative;
+    z-index: 0;
+    flex: 1 1 0;
+    min-width: 0;
+    cursor: pointer;
+    padding: 0.7rem 0.2rem;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.88);
+    background-color: var(--ticket);
+    background-image:
+      radial-gradient(circle at 0 0, var(--cut) var(--notch), transparent calc(var(--notch) + 0.5px)),
+      radial-gradient(circle at 100% 0, var(--cut) var(--notch), transparent calc(var(--notch) + 0.5px)),
+      radial-gradient(circle at 0 100%, var(--cut) var(--notch), transparent calc(var(--notch) + 0.5px)),
+      radial-gradient(circle at 100% 100%, var(--cut) var(--notch), transparent calc(var(--notch) + 0.5px));
+    background-repeat: no-repeat;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease,
+      transform 0.12s ease;
+  }
+
+  /* Comic perforation — dotted vertical divider between days */
+  .day-ticket:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 18%;
+    right: 0;
+    bottom: 18%;
+    width: 0;
+    border-right: 2px dotted rgba(255, 255, 255, 0.45);
+    pointer-events: none;
+  }
+
+  .day-ticket:hover {
+    color: #fff;
+    background-color: #a52436;
+  }
+
+  .day-ticket-active {
+    --ticket: #e1203c;
+    color: #fff;
+    z-index: 1;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  .day-ticket-active:hover {
+    background-color: #e1203c;
+  }
+
+  @media (min-width: 640px) {
+    .day-ticket {
+      font-size: 13px;
+      padding: 0.75rem 0.3rem;
+    }
   }
 
   .m1-watermark {

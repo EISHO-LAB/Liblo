@@ -19,7 +19,7 @@ export function ComicPage() {
   return (
     <div className="min-h-screen bg-[#111]">
       <div className="flex h-dvh flex-col overflow-hidden">
-        <div className="m1-dot-bg shrink-0">
+        <div className="shrink-0">
           <HeroCarousel />
         </div>
         <DayRanking className="flex min-h-0 flex-1 flex-col" />
@@ -37,17 +37,15 @@ export function ComicPage() {
         light
       />
 
-      <div className="m1-dot-bg">
-        <RecommendRail title="LIBLO originals" watermark="ORIGINAL" items={originals} />
-      </div>
+      <RecommendRail title="LIBLO originals" watermark="ORIGINAL" items={originals} />
 
       <RecommendRail title="One-shots" watermark="ONESHOT" items={oneShots} light />
 
-      <div className="m1-dot-bg pb-4">
-        <RecommendRail title="Comics" watermark="COMICS" items={comicsShelf} />
+      <RecommendRail title="Comics" watermark="COMICS" items={comicsShelf} />
 
-        <section className="relative mx-auto mt-10 max-w-[1200px] overflow-hidden px-4 md:px-6">
-          <div className="relative flex flex-col items-center gap-4 overflow-hidden rounded-2xl bg-[#1a1a1a] px-6 py-10 md:flex-row md:justify-between">
+      <div className="m1-dot-bg pb-4">
+        <section className="relative mx-auto max-w-[1200px] overflow-hidden px-4 pt-6 md:px-6">
+          <div className="relative flex flex-col items-center gap-4 overflow-hidden rounded-2xl bg-[#1a1a1a]/80 px-6 py-10 ring-1 ring-white/6 md:flex-row md:justify-between">
             <img
               src="/m1/assets/home/movie-section/rectangle-left-sp.svg"
               alt=""
