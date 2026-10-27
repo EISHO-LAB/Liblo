@@ -5,7 +5,7 @@ import { ComicPromoBadge, RANK_PROMO } from '@/components/comic/promo-badge'
 import { ComicRankBadge } from '@/components/comic/rank-badge'
 import { ComicTitleLine } from '@/components/comic/title-line'
 import { Icon } from '@/components/icons/icon'
-import { rankingPool } from '@/data/comic'
+import { comicTitleHref, rankingPool } from '@/data/comic'
 import { cn } from '@/lib/utils'
 
 const ITEMS = rankingPool.slice(0, 7)
@@ -35,7 +35,7 @@ export function DayRanking({ className }: { className?: string }) {
             const promo = RANK_PROMO[rank]
 
             return (
-              <Link key={t.id} to="/comic" className="relative min-w-0">
+              <Link key={t.id} to={comicTitleHref(t)} className="relative min-w-0">
                 <div className="relative overflow-visible">
                   <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-[#eee] ring-1 ring-black/8">
                     <img

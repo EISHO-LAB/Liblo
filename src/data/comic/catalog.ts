@@ -17,6 +17,8 @@ export type ComicTitle = {
   /** Creator credit shown under the title on cards. */
   writer: string
   cover: string
+  /** Deep link when the title has a real cover/reader page. */
+  href?: string
   chapter?: string
   views: number
   genre?: ComicGenre
@@ -26,6 +28,10 @@ export type ComicTitle = {
   isHot?: boolean
   /** 1-based chart place by views — drives TOP 10 / TOP 25 chips (not shown in ranking). */
   chartRank?: number
+}
+
+export function comicTitleHref(title: Pick<ComicTitle, 'href'>): string {
+  return title.href ?? '/comic'
 }
 
 /** Compact view score: 980 · 12.4k · 1.2m */
@@ -62,6 +68,20 @@ export const heroBanners = [
 ]
 
 const titles: Omit<ComicTitle, 'id' | 'chartRank'>[] = [
+  {
+    title: 'Pepper & Carrot',
+    subtitle: 'The Potion of Flight — open-source webcomic',
+    writer: 'David Revoy',
+    cover: '/opensource/pepper-carrot/cover-portrait-800.jpg',
+    href: '/title/pepper-and-carrot',
+    chapter: 'Ep. 1–2',
+    views: 3_120_000,
+    genre: 'fantasy',
+    isUp: true,
+    isOriginal: true,
+    isHot: true,
+    isNewSeason: true,
+  },
   { title: 'Midnight Signal', subtitle: 'A late-night chat becomes destiny', writer: 'Rina Vale', cover: c(1), chapter: 'Ep. 42', views: 2_450_000, genre: 'romance', isUp: true, isOriginal: true, isHot: true, isNewSeason: true },
   { title: 'Rainy Roof', subtitle: 'Secrets on a wet city skyline', writer: 'Ken Mori', cover: c(2), chapter: 'Ep. 18', views: 1_180_000, genre: 'drama', isUp: true, isHot: true },
   { title: 'Glass Garden', subtitle: 'Crystal blooms that never sleep', writer: 'Aya Frost', cover: c(3), chapter: 'Ep. 7', views: 890_000, genre: 'fantasy', isUp: true, isOriginal: true, isNewSeason: true },

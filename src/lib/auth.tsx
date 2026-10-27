@@ -44,8 +44,8 @@ const DEMO_USER: AuthUser = {
   displayName: 'Admin',
   avatarUrl: '/covers/midnight-chat.jpg',
   provider: 'password',
-  isWriter: false,
-  writerStatus: 'none',
+  isWriter: true,
+  writerStatus: 'approved',
 }
 
 const DEMO_CREDENTIALS = {
@@ -58,7 +58,17 @@ function readStoredUser(): AuthUser | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return null
-    return JSON.parse(raw) as AuthUser
+    const user = JSON.parse(raw) as AuthUser
+    // Demo admin is always an approved writer so studio pages are reachable.
+    if (user.email === DEMO_USER.email || user.id === DEMO_USER.id) {
+      return {
+        ...user,
+        isWriter: true,
+        writerStatus: 'approved',
+        displayName: user.displayName || DEMO_USER.displayName,
+      }
+    }
+    return user
   } catch {
     return null
   }
@@ -97,13 +107,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!okIdentity || password !== DEMO_CREDENTIALS.password) {
         throw new Error('Invalid email/username or password. Try admin / admin123')
       }
-      const existing = readStoredUser()
-      setSession({
-        ...DEMO_USER,
-        isWriter: existing?.email === DEMO_USER.email ? existing.isWriter : false,
-        writerStatus:
-          existing?.email === DEMO_USER.email ? existing.writerStatus : 'none',
-      })
+      setSession({ ...DEMO_USER })
       setPendingSignup(null)
       setLastOtpHint(null)
     },

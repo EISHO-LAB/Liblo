@@ -15,6 +15,7 @@ import { ComicRankBadge } from '@/components/comic/rank-badge'
 import { ComicTitleLine } from '@/components/comic/title-line'
 import { Icon } from '@/components/icons/icon'
 import {
+  comicTitleHref,
   formatViews,
   RANKING_PREVIEW,
   rankingForTab,
@@ -29,7 +30,7 @@ function RankRow({ title, rank }: { title: ComicTitle; rank: number }) {
 
   return (
     <Link
-      to="/comic"
+      to={comicTitleHref(title)}
       className="flex h-full min-h-0 items-center gap-3 border-b border-black/8 py-2.5 last:border-b-0 hover:bg-black/[0.02]"
     >
       <div className="relative w-[72px] shrink-0 overflow-visible">
@@ -117,7 +118,10 @@ export function CategoryRanking({ className, defaultTab = 'overall' }: CategoryR
         ) : (
           <>
             <div className="relative mt-6 grid items-stretch gap-5 lg:grid-cols-[minmax(0,0.58fr)_minmax(0,1.42fr)] lg:gap-6">
-              <Link to="/comic" className="group flex h-full min-h-0 min-w-0 flex-col">
+              <Link
+                to={comicTitleHref(featured)}
+                className="group flex h-full min-h-0 min-w-0 flex-col"
+              >
                 <div className="relative min-h-[220px] flex-1 overflow-visible">
                   <div className="absolute inset-0 overflow-hidden rounded-lg bg-[#eee] ring-1 ring-black/8">
                     <img

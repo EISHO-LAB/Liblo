@@ -4,7 +4,7 @@ import { ComicCardMeta } from '@/components/comic/card-meta'
 import { CoverChartBadge } from '@/components/comic/cover-chart-badge'
 import { CoverOriginalBadge } from '@/components/comic/cover-original-badge'
 import { ComicTitleLine } from '@/components/comic/title-line'
-import { catalog, days, todayKey } from '@/data/comic'
+import { catalog, comicTitleHref, days, todayKey } from '@/data/comic'
 import { cn } from '@/lib/utils'
 
 export function TodayUpdates() {
@@ -54,7 +54,11 @@ export function TodayUpdates() {
 
         <div className="relative scrollbar-hide flex gap-3 overflow-x-auto pb-2">
           {items.map((t) => (
-            <Link key={`${day}-${t.id}`} to="/comic" className="w-[128px] shrink-0 sm:w-[148px]">
+            <Link
+              key={`${day}-${t.id}`}
+              to={comicTitleHref(t)}
+              className="w-[128px] shrink-0 sm:w-[148px]"
+            >
               <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-[#2a2a2a]">
                 <img src={t.cover} alt="" className="h-full w-full object-cover object-top" />
                 {t.isOriginal ? <CoverOriginalBadge /> : null}

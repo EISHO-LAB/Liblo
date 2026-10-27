@@ -1,0 +1,20 @@
+Pepper & Carrot — Episodes 1–2 (Liblo 800px cuts)
+================================================
+
+Source: https://www.peppercarrot.com/
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+Attribution (required by the license):
+  Art & scenario: David Revoy
+  English proofreading: Amireeti, Alex Gryson (and episode-specific credits on peppercarrot.com)
+  Universe of Pepper&Carrot / Hereva: created by David Revoy
+
+Liblo re-export:
+  Width 800px, each cut height ≤ 1280px, RGB JPEG
+  ep01/liblo-cuts, ep01/liblo-long-strip.jpg
+  ep02/liblo-cuts, ep02/liblo-long-strip.jpg
+  See liblo-spec.json
+
+Files under this folder are redistributed for Liblo demo catalog / reader UI only.
+Do not remove this attribution when republishing the images.

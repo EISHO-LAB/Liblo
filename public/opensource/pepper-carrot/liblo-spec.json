@@ -1,0 +1,88 @@
+{
+  "spec": {
+    "widthPx": 800,
+    "cutMaxHeightPx": 1280,
+    "format": "JPEG",
+    "color": "RGB"
+  },
+  "episodes": {
+    "1": {
+      "title": "The Potion of Flight",
+      "cuts": [
+        {
+          "file": "01.jpg",
+          "w": 800,
+          "h": 191,
+          "bytes": 19265
+        },
+        {
+          "file": "02.jpg",
+          "w": 800,
+          "h": 1107,
+          "bytes": 167210
+        },
+        {
+          "file": "03.jpg",
+          "w": 800,
+          "h": 1107,
+          "bytes": 165636
+        },
+        {
+          "file": "04.jpg",
+          "w": 800,
+          "h": 1107,
+          "bytes": 121159
+        }
+      ],
+      "longStrip": "ep01/liblo-long-strip.jpg"
+    },
+    "2": {
+      "title": "Rainbow Potions",
+      "cuts": [
+        {
+          "file": "01.jpg",
+          "w": 800,
+          "h": 191,
+          "bytes": 20779
+        },
+        {
+          "file": "02.jpg",
+          "w": 800,
+          "h": 1107,
+          "bytes": 247688
+        },
+        {
+          "file": "03.jpg",
+          "w": 800,
+          "h": 1107,
+          "bytes": 211163
+        },
+        {
+          "file": "04.jpg",
+          "w": 800,
+          "h": 1107,
+          "bytes": 198641
+        },
+        {
+          "file": "05.jpg",
+          "w": 800,
+          "h": 1107,
+          "bytes": 202386
+        },
+        {
+          "file": "06.jpg",
+          "w": 800,
+          "h": 1107,
+          "bytes": 169485
+        },
+        {
+          "file": "07.jpg",
+          "w": 800,
+          "h": 267,
+          "bytes": 65505
+        }
+      ],
+      "longStrip": "ep02/liblo-long-strip.jpg"
+    }
+  }
+}

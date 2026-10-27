@@ -27,6 +27,21 @@ export const categories = [
 
 export const catalog: SeriesCard[] = [
   {
+    id: '0',
+    slug: 'pepper-and-carrot',
+    title: 'Pepper & Carrot',
+    format: 'SCROLL',
+    genre: 'Fantasy',
+    tags: ['Fantasy', 'Comedy', 'Open source'],
+    year: 2014,
+    seasons: '2 Episodes (800px Liblo cuts)',
+    quality: 'HD',
+    synopsis:
+      'Young witch Pepper and her cat Carrot brew mischief in Hereva. Open-source webcomic by David Revoy (CC BY 4.0), re-exported to Liblo’s 800×≤1280 scroll upload spec.',
+    coverUrl: '/opensource/pepper-carrot/cover-portrait-800.jpg',
+    tone: 'from-amber-950 via-orange-950 to-rose-950',
+  },
+  {
     id: '1',
     slug: 'midnight-chat',
     title: 'Midnight Chat',

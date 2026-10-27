@@ -5,7 +5,7 @@ import { CoverChartBadge } from '@/components/comic/cover-chart-badge'
 import { CoverOriginalBadge } from '@/components/comic/cover-original-badge'
 import { ComicTitleLine } from '@/components/comic/title-line'
 import { Icon } from '@/components/icons/icon'
-import type { ComicTitle } from '@/data/comic'
+import { comicTitleHref, type ComicTitle } from '@/data/comic'
 
 type Props = {
   title: string
@@ -51,7 +51,7 @@ export function RecommendRail({ title, watermark, items, light = false }: Props)
 
         <div ref={ref} className="relative scrollbar-hide flex gap-4 overflow-x-auto pb-1">
           {items.map((t) => (
-            <Link key={t.id} to="/comic" className="w-[148px] shrink-0 sm:w-[168px]">
+            <Link key={t.id} to={comicTitleHref(t)} className="w-[148px] shrink-0 sm:w-[168px]">
               <div className="relative aspect-[2/3] overflow-hidden rounded-lg">
                 <img src={t.cover} alt="" className="h-full w-full object-cover" />
                 {t.isOriginal ? <CoverOriginalBadge /> : null}
