@@ -2,6 +2,9 @@
 
 **100% layout clone (English) of [マンガワン / Manga One](https://manga-one.com/)**
 
+Implemented on branch **`kenji-design`** mainly by **TTIANQII**.  
+Full style analysis for matching that work: **[`docs/TTIANQII_KENJI_DESIGN_STYLE.md`](./docs/TTIANQII_KENJI_DESIGN_STYLE.md)**
+
 Local scrape: `~/Desktop/manga_one.com`  
 Served assets: `Liblo-front/public/m1/` (UI chrome + scraped covers/banners for prototyping)
 
