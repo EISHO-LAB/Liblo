@@ -36,7 +36,7 @@ export function CoverChartBadge({ title, className }: Props) {
   return (
     <CornerWrapRibbon fill={tone.fill} fold={tone.fold} className={className}>
       <span className="flex flex-col items-center leading-none">
-        <span className="font-display text-[7px] font-extrabold tracking-[0.08em]">TOP</span>
+        <span className="font-display text-[4.2cqw] font-extrabold tracking-[0.08em]">TOP</span>
         <span className={cn(RIBBON_NUM)}>{n}</span>
       </span>
     </CornerWrapRibbon>

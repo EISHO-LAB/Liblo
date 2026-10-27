@@ -16,7 +16,7 @@ export function TodayUpdates() {
     const offset = Math.max(0, days.findIndex((x) => x.key === day))
     const pool = [...catalog.slice(offset), ...catalog.slice(0, offset)].filter((t) => t.isUp)
     const fallback = [...catalog.slice(offset), ...catalog.slice(0, offset)]
-    return (pool.length ? pool : fallback).slice(0, 14)
+    return (pool.length ? pool : fallback).slice(0, 21)
   }, [day])
 
   return (
@@ -48,9 +48,11 @@ export function TodayUpdates() {
           ))}
         </div>
 
+        {/* pt-2.5 = same ribbon clearance as recommend rail */}
         <div className="relative grid grid-cols-3 gap-x-2.5 gap-y-5 pt-2.5 sm:grid-cols-4 sm:gap-x-3 sm:gap-y-6 md:grid-cols-5 lg:grid-cols-7 lg:gap-x-3.5 lg:gap-y-7">
           {items.map((t) => (
             <Link key={`${day}-${t.id}`} to={comicTitleHref(t)} className="min-w-0">
+              {/* @container/cover → ribbon cqw locks to this cover width (same as recommend) */}
               <div className="@container/cover relative isolate overflow-visible">
                 <div className="relative z-[1] aspect-[2/3] overflow-hidden rounded-lg bg-[#1c1c1c] ring-1 ring-white/8">
                   <img

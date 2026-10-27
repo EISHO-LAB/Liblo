@@ -13,21 +13,21 @@ const TONE: Record<number, { fill: string; fold: string }> = {
   3: { fill: '#d4783a', fold: '#9a4a1c' }, // bronze
 }
 
-/** Shared ribbon number style — same size + font for 1/2/3 and TOP 5/10/25 */
+/**
+ * Number size locked to cover width (16px @ 168px recommend card).
+ * Parent must be `@container/cover`.
+ */
 export const RIBBON_NUM =
-  'font-display text-[16px] font-black leading-none tracking-tight'
+  'font-display text-[9.5cqw] font-black leading-none tracking-tight'
 
 /**
- * Ribbon badge matching the reference wrap:
+ * Chart ribbon — size + top overhang lock to cover width via `cqw`.
+ * Looks the same on recommend (wide) and updates (tight grid).
  *
- *        ╱╲          dark fold ears (behind)
- *   ─────████─────   clean face peeks above card
- *        ████
- *        ████
- *         ◇          swallowtail
+ * Parent shell: `@container/cover relative isolate overflow-visible`
+ * Cover face:   `relative z-[1] overflow-hidden` (tight — no padding)
  *
- * Parent: `relative isolate overflow-visible`
- * Cover:  `relative z-[1] overflow-hidden`
+ * Calibrated to recommend ~168px: w30 / h48 / right10 / over3.
  */
 export function CornerWrapRibbon({
   fill,
@@ -43,30 +43,26 @@ export function CornerWrapRibbon({
 }) {
   const w = 30
   const h = 48
-  const earW = 2.5 // very subtle outward flare
+  const earW = 2.5
   const earH = 7
   const over = 3
-  const right = 10
-  // tip nearly flush with the side — barely angled out
   const tipDrop = over + 0.5
 
   return (
     <>
-      {/* BACK — fold ears flare outward (มุมเอียงออก) + light wrap slivers */}
+      {/* BACK — fold ears */}
       <svg
         aria-hidden
         className={cn('pointer-events-none absolute z-0', className)}
-        width={w + earW * 2}
-        height={over + earH}
         viewBox={`0 0 ${w + earW * 2} ${over + earH}`}
+        preserveAspectRatio="none"
         style={{
-          top: -over,
-          right: right - earW,
-          width: w + earW * 2,
-          height: over + earH,
+          top: '-1.79cqw',
+          right: '4.46cqw',
+          width: '20.83cqw',
+          height: '5.95cqw',
         }}
       >
-        {/* Light slivers under the ears */}
         <path
           d={`M${earW} ${over} L${earW - earW * 0.85} ${over + earH} L${earW} ${over + earH * 0.5} Z`}
           fill="#f3f3f3"
@@ -75,28 +71,28 @@ export function CornerWrapRibbon({
           d={`M${earW + w} ${over} L${earW + w + earW * 0.85} ${over + earH} L${earW + w} ${over + earH * 0.5} Z`}
           fill="#f3f3f3"
         />
-        {/* Dark fold ears — tip farther out so angle flares away from the ribbon */}
-        <path
-          d={`M${earW} 0 L0 ${tipDrop} L${earW} ${over + earH} Z`}
-          fill={fold}
-        />
+        <path d={`M${earW} 0 L0 ${tipDrop} L${earW} ${over + earH} Z`} fill={fold} />
         <path
           d={`M${earW + w} 0 L${earW * 2 + w} ${tipDrop} L${earW + w} ${over + earH} Z`}
           fill={fold}
         />
       </svg>
 
-      {/* FRONT — clean face only (no triangles on it) */}
+      {/* FRONT — clean face */}
       <span
         className="pointer-events-none absolute z-[2] drop-shadow-[1px_2px_2px_rgba(0,0,0,0.28)]"
-        style={{ top: -over, right, width: w, height: h }}
+        style={{
+          top: '-1.79cqw',
+          right: '5.95cqw',
+          width: '17.86cqw',
+          height: '28.57cqw',
+        }}
       >
         <svg
           aria-hidden
-          width={w}
-          height={h}
           viewBox={`0 0 ${w} ${h}`}
-          className="absolute inset-0"
+          className="absolute inset-0 h-full w-full"
+          preserveAspectRatio="none"
         >
           <path
             d={`M0 0 H${w} V${h - 12} L${w / 2} ${h} L0 ${h - 12} Z`}
@@ -110,7 +106,7 @@ export function CornerWrapRibbon({
             'font-display font-black leading-none text-white',
             '[text-shadow:0_1px_1px_rgba(0,0,0,0.3)]',
           )}
-          style={{ top: over + 3, bottom: 14 }}
+          style={{ top: '12.5%', bottom: '29%' }}
         >
           {children}
         </span>
@@ -129,9 +125,11 @@ export function RankRibbonBadge({ rank, className }: Props) {
       <span className="flex flex-col items-center leading-none">
         <Icon
           icon={rank === 1 ? 'game-icons:queen-crown' : 'mdi:crown'}
-          width={rank === 1 ? 22 : 20}
-          height={rank === 1 ? 14 : 13}
-          className="-mb-0.5 text-white"
+          className="-mb-[0.15cqw] text-white"
+          style={{
+            width: rank === 1 ? '13.1cqw' : '11.9cqw',
+            height: rank === 1 ? '8.3cqw' : '7.7cqw',
+          }}
         />
         <span className={RIBBON_NUM}>{rank}</span>
       </span>
