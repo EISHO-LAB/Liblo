@@ -72,7 +72,7 @@ const titles: Omit<ComicTitle, 'id' | 'chartRank'>[] = [
     title: 'Pepper & Carrot',
     subtitle: 'The Potion of Flight — open-source webcomic',
     writer: 'David Revoy',
-    cover: '/opensource/pepper-carrot/cover-portrait-800.jpg',
+    cover: '/opensource/pepper-carrot/cover-portrait-600x800.jpg',
     href: '/title/pepper-and-carrot',
     chapter: 'Ep. 1–2',
     views: 3_120_000,

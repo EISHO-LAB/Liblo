@@ -69,7 +69,7 @@ export const openSourceTitles: OpenSourceTitle[] = [
       'Young witch Pepper and her cat Carrot brew mischief in the magical land of Hereva. Episodes below are resized to Liblo’s writer upload spec (800px wide cuts, max 1280px tall) so they match the studio pipeline.',
     format: 'SCROLL',
     genre: 'fantasy',
-    coverPortrait: `${PC}/cover-portrait-800.jpg`,
+    coverPortrait: `${PC}/cover-portrait-600x800.jpg`,
     coverLandscape: `${PC}/cover-landscape-1200.jpg`,
     license: 'CC BY 4.0',
     licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',

@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { Icon } from '@/components/icons/icon'
+import { SeriesCoverUpload } from '@/components/writer/series-cover-upload'
 import { getWriterSeries, listWriterEpisodes } from '@/data/writer-demo'
 import { useAuth } from '@/lib/auth'
 import '@/styles/writer.css'
@@ -10,8 +12,8 @@ export function WriterSeriesPage() {
   if (!user) return null
   if (user.writerStatus === 'none') return <Navigate to="/writer" replace />
 
-  const series = getWriterSeries(seriesId)
-  if (!series) {
+  const initial = getWriterSeries(seriesId)
+  if (!initial) {
     return (
       <main className="writer-studio">
         <div className="writer-shell">
@@ -27,6 +29,12 @@ export function WriterSeriesPage() {
     )
   }
 
+  return <SeriesWorkspace key={initial.id} seriesId={initial.id} />
+}
+
+function SeriesWorkspace({ seriesId }: { seriesId: string }) {
+  const seed = getWriterSeries(seriesId)!
+  const [series, setSeries] = useState(seed)
   const episodes = listWriterEpisodes(series.id)
 
   return (
@@ -53,8 +61,7 @@ export function WriterSeriesPage() {
               </p>
               <h1>{series.title}</h1>
               <p className="writer-intro-copy">
-                Upload with cut panels or a long strip — readers always get a smooth
-                vertical scroll.
+                Set universal cover sizes first, then upload episode cuts or a long strip.
               </p>
               <div className="writer-series-meta">
                 <span
@@ -65,6 +72,7 @@ export function WriterSeriesPage() {
                   {series.status}
                 </span>
                 <span className="writer-chip">{episodes.length} episodes</span>
+                <span className="writer-chip">Cover 600×800</span>
               </div>
             </div>
           </div>
@@ -73,6 +81,8 @@ export function WriterSeriesPage() {
             <Icon icon="lucide:plus" width={16} height={16} />
           </Link>
         </header>
+
+        <SeriesCoverUpload series={series} onSeriesChange={setSeries} />
 
         <div className="writer-section-head">
           <div>

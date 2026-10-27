@@ -38,7 +38,7 @@ export const catalog: SeriesCard[] = [
     quality: 'HD',
     synopsis:
       'Young witch Pepper and her cat Carrot brew mischief in Hereva. Open-source webcomic by David Revoy (CC BY 4.0), re-exported to Liblo’s 800×≤1280 scroll upload spec.',
-    coverUrl: '/opensource/pepper-carrot/cover-portrait-800.jpg',
+    coverUrl: '/opensource/pepper-carrot/cover-portrait-600x800.jpg',
     tone: 'from-amber-950 via-orange-950 to-rose-950',
   },
   {

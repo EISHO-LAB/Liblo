@@ -1,11 +1,15 @@
 import { openSourceTitles } from '@/data/opensource-titles'
+import type { CoverKind } from '@/data/writer-cover-spec'
 
 export type WriterSeries = {
   id: string
   title: string
   format: 'SCROLL' | 'CHAT' | 'EBOOK'
   status: 'draft' | 'published'
+  /** Primary catalog cover (universal 600×800 portrait). */
   cover: string
+  coverSquare?: string | null
+  coverVertical?: string | null
   episodeCount: number
   updatedAt: string
   /** Optional reader deep-link for open-source demos */
@@ -24,8 +28,8 @@ export type WriterEpisode = {
   readHref?: string
 }
 
-const SERIES_KEY = 'liblo.writer.series.v3'
-const EPISODES_KEY = 'liblo.writer.episodes.v3'
+const SERIES_KEY = 'liblo.writer.series.v4'
+const EPISODES_KEY = 'liblo.writer.episodes.v4'
 
 const pepper = openSourceTitles[0]!
 
@@ -168,4 +172,25 @@ export function saveWriterEpisodeDraft(input: {
   }
 
   return episode
+}
+
+export function updateWriterSeriesCover(
+  seriesId: string,
+  kind: CoverKind,
+  dataUrl: string | null,
+): WriterSeries | null {
+  const list = listWriterSeries()
+  const index = list.findIndex((s) => s.id === seriesId)
+  if (index < 0) return null
+  const current = list[index]!
+  const next: WriterSeries = {
+    ...current,
+    updatedAt: new Date().toISOString(),
+  }
+  if (kind === 'portrait') next.cover = dataUrl || current.cover
+  if (kind === 'square') next.coverSquare = dataUrl
+  if (kind === 'vertical') next.coverVertical = dataUrl
+  list[index] = next
+  writeJson(SERIES_KEY, list)
+  return next
 }

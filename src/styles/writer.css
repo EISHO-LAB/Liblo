@@ -323,6 +323,190 @@ a.writer-episode-row:hover {
   font-size: 12px;
 }
 
+.writer-cover-section {
+  margin-bottom: 28px;
+}
+
+.writer-cover-intro .writer-muted {
+  margin: 8px 0 0;
+  max-width: 560px;
+  color: #8f8f8f;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.writer-cover-intro .writer-muted b {
+  color: #fff;
+  font-weight: 700;
+}
+
+.writer-cover-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 16px;
+}
+
+.writer-cover-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+  text-align: left;
+}
+
+.writer-cover-tab strong {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.writer-cover-tab span {
+  color: #8f8f8f;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.writer-cover-tab.is-active {
+  border-color: rgba(246, 51, 79, 0.7);
+  background: rgba(246, 51, 79, 0.1);
+}
+
+.writer-cover-layout {
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.writer-cover-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0c0c0c;
+  cursor: pointer;
+  color: inherit;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.writer-cover-frame:hover,
+.writer-cover-frame:focus-visible {
+  border-color: rgba(255, 98, 120, 0.65);
+  box-shadow: 0 0 0 3px rgba(246, 51, 79, 0.2);
+}
+
+.writer-cover-change {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  opacity: 0.92;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.writer-cover-frame:hover .writer-cover-change,
+.writer-cover-frame:focus-visible .writer-cover-change {
+  opacity: 1;
+  background: rgba(246, 51, 79, 0.92);
+}
+
+.writer-cover-frame.is-portrait {
+  aspect-ratio: 3 / 4;
+}
+
+.writer-cover-frame.is-square {
+  aspect-ratio: 1 / 1;
+}
+
+.writer-cover-frame.is-vertical {
+  aspect-ratio: 9 / 16;
+  max-height: 360px;
+  justify-self: center;
+  width: min(100%, 160px);
+}
+
+.writer-cover-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.writer-cover-placeholder {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  height: 100%;
+  min-height: 180px;
+  padding: 20px;
+  color: #737373;
+  text-align: center;
+  font-size: 12px;
+}
+
+.writer-cover-side {
+  min-width: 0;
+}
+
+.writer-cover-spec {
+  margin: 0 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.writer-cover-spec > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+}
+
+.writer-cover-spec dt {
+  color: #8f8f8f;
+}
+
+.writer-cover-spec dd {
+  margin: 0;
+  font-weight: 700;
+  text-align: right;
+  max-width: 62%;
+}
+
+.writer-cover-drop {
+  min-height: 120px;
+}
+
+.writer-cover-ok {
+  margin: 10px 0 0;
+  color: #86efac;
+  font-size: 12px;
+}
+
 .writer-upload-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.75fr);
@@ -761,7 +945,9 @@ a.writer-episode-row:hover {
 @media (max-width: 900px) {
   .writer-upload-layout,
   .writer-modes,
-  .writer-grid {
+  .writer-grid,
+  .writer-cover-tabs,
+  .writer-cover-layout {
     grid-template-columns: 1fr;
   }
 
