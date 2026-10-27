@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="180" viewBox="0 0 240 180" fill="none" role="img" aria-labelledby="title"><title id="title">A red treasure chest full of Liblo coins</title><defs><g id="coin">
+  <defs>
+    <clipPath id="lc-rim"><circle cx="256" cy="256" r="207"/></clipPath>
+    <path id="lc-book" d="M256 199C228 179 192 170 153 174C145 175 141 180 141 187V317C141 324 146 329 154 328C193 325 225 335 250 351Q256 355 262 351C287 335 319 325 358 328C366 329 371 324 371 317V187C371 180 367 175 359 174C320 170 284 179 256 199Z"/>
+  </defs>
+  <!-- Flat, warm gold with a restrained faceted rim. -->
+  <circle cx="256" cy="260" r="214" fill="#C9851C"/>
+  <circle cx="256" cy="256" r="214" fill="#FFE077"/>
+  <circle cx="256" cy="256" r="207" fill="#F7BE35"/>
+  <g clip-path="url(#lc-rim)">
+    <path d="M272 39H367L75 439L35 352Z" fill="#FFD651"/>
+    <path d="M440 124L483 192L285 479H203Z" fill="#FFD651"/>
+  </g>
+  <circle cx="256" cy="254" r="171" fill="#BC771A"/>
+  <circle cx="256" cy="262" r="166" fill="#EAA02A"/>
+  <path d="M119 357A166 166 0 0 0 393 357" stroke="#F6BC3F" stroke-width="5" stroke-linecap="round"/>
+  <!-- A clear embossed book; the center stays legible at icon sizes. -->
+  <use href="#lc-book" fill="#BB791C" transform="translate(0 9)"/>
+  <use href="#lc-book" fill="#FFDF69"/>
+  <path d="M256 199C284 179 320 170 359 174C367 175 371 180 371 187V317C371 324 366 329 358 328C319 325 287 335 262 351Q259 353 256 353Z" fill="#F8CC4A"/>
+  <path d="M256 209V328" stroke="#C58A22" stroke-width="9" stroke-linecap="round"/>
+  <g stroke="#D5A132" stroke-width="9" stroke-linecap="round">
+    <path d="M170 221Q201 222 229 236"/>
+    <path d="M170 259Q201 260 229 274"/>
+    <path d="M283 236Q311 222 342 221"/>
+    <path d="M283 274Q311 260 342 259"/>
+  </g>
+</g></defs>
+
+  <!-- The lid follows the box perspective: a tilted inner face, top thickness,
+       and a separate right end cap that meets the rear hinge at (199, 87). -->
+  <path d="M61 25L79 16L163 26L145 35Z" fill="#EF3C55"/>
+  <path d="M77 83L52 41C45 26 50 23 61 25L145 35C153 36 158 40 161 49L181 96Z" fill="#D92C47"/>
+  <path d="M80 76L61 43C57 35 60 32 68 34L141 43C148 44 151 47 154 54L168 85Z" fill="#792637"/>
+  <path d="M80 76L61 43C57 35 60 32 68 34L141 43C148 44 151 47 154 54L168 85" stroke="#D8A332" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- A substantial end cap makes the open lid read in three dimensions. -->
+  <path d="M145 35L163 26C171 27 176 31 180 40L199 87L181 96L161 49C157 40 153 36 145 35Z" fill="#B5233D"/>
+  <path d="M157 36L164 32C169 33 172 37 175 44L192 84L184 88L166 47C163 40 161 37 157 36Z" fill="#E33750"/>
+  <path d="M163 26C171 27 176 31 180 40L199 87" stroke="#C38B26" stroke-width="4" stroke-linecap="round"/>
+  <path d="M145 35C153 36 158 40 161 49L181 96" stroke="#F6C94D" stroke-width="5" stroke-linecap="round"/>
+  <path d="M61 25L145 35" stroke="#FFDA62" stroke-width="4" stroke-linecap="round"/>
+  <path d="M77 83L181 96L199 87" stroke="#DCA633" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Matching brass bands wrap over the upper rim of the tilted lid. -->
+  <path d="M77 18L87 19L69 28L59 27Z" fill="#E6AD34"/>
+  <path d="M122 23L132 24L114 33L104 32Z" fill="#E6AD34"/>
+  <path d="M59 27L69 28L73 36L63 35Z" fill="#FFD65B"/>
+  <path d="M104 32L114 33L118 41L108 40Z" fill="#FFD65B"/>
+
+  <!-- Dark opening gives the coins a clear place inside the chest. -->
+  <path d="M49 96L95 74L199 87L153 110Z" fill="#792235"/>
+  <path d="M58 94L89 84L187 90L151 104Z" fill="#A82B3C"/>
+  <use href="#coin" transform="translate(57 54) scale(.108)"/>
+  <use href="#coin" transform="translate(88 42) scale(.137)"/>
+  <use href="#coin" transform="translate(127 57) scale(.112)"/>
+  <ellipse cx="96" cy="98" rx="18" ry="6" fill="#F5BD35"/>
+  <ellipse cx="146" cy="101" rx="22" ry="6" fill="#E8A72A"/>
+
+  <!-- A solid, broad box with consistent front and side perspective. -->
+  <path d="M49 96L153 109L199 87V140Q199 144 195 146L154 164Q152 165 148 164L54 152Q49 151 49 146Z" fill="#A11E36"/>
+  <path d="M49 96L153 109V161L55 149Q49 148 49 142Z" fill="#F6334F"/>
+  <path d="M153 109L199 87V140Q199 144 195 146L153 164Z" fill="#BD2540"/>
+  <path d="M49 138L153 151V163L55 151Q49 150 49 145Z" fill="#DC2B46"/>
+  <path d="M153 151L199 131V141Q199 145 195 147L153 164Z" fill="#A31E36"/>
+
+  <!-- Brass straps sit flush on each face, with a small centered lock. -->
+  <path d="M69 99L80 100V152L69 151Z" fill="#F6CA4D"/>
+  <path d="M130 106L141 108V160L130 158Z" fill="#F6CA4D"/>
+  <path d="M180 96L189 92V149L180 153Z" fill="#DEAA32"/>
+  <path d="M49 96L153 109L199 87" stroke="#FFDC65" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 148L153 161L196 142" stroke="#EAB63B" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M97 105L119 108V132L97 129Z" fill="#D79823"/>
+  <path d="M98 105L120 108V129L98 126Z" fill="#FFDA62"/>
+  <circle cx="109" cy="115" r="3" fill="#996215"/>
+  <path d="M109 116V121" stroke="#996215" stroke-width="3" stroke-linecap="round"/>
+  <g fill="#B37A20">
+    <circle cx="74.5" cy="108" r="1.7"/>
+    <circle cx="74.5" cy="142" r="1.7"/>
+    <circle cx="135.5" cy="116" r="1.7"/>
+    <circle cx="135.5" cy="150" r="1.7"/>
+  </g>
+
+  <!-- A compact stack and one loose book coin balance the silhouette. -->
+  <path d="M178 144V161C178 173 224 173 224 161V144Z" fill="#F1B52B" stroke="#D4901D" stroke-width="2"/>
+  <path d="M178 152C178 164 224 164 224 152M178 159C178 171 224 171 224 159" stroke="#D4901D" stroke-width="2"/>
+  <ellipse cx="201" cy="144" rx="23" ry="8" fill="#F9D64D" stroke="#E3A42A" stroke-width="2"/>
+  <ellipse cx="201" cy="144" rx="16" ry="4.5" fill="#F4C53D"/>
+  <use href="#coin" transform="translate(13 119) scale(.085)"/>
+</svg>

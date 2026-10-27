@@ -1,5 +1,5 @@
 /** Site-wide product nav — LIBLO has multiple formats. */
-export const navLinks = [
+export const navLinks: { label: string; href: string; external?: boolean }[] = [
   { label: 'Comics', href: '/comic' },
   { label: 'Chat novels', href: '/chat' },
   { label: 'E-books', href: '/ebooks' },

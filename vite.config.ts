@@ -14,7 +14,8 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:3020',
+        // Prefer PORT from Liblo-back/.env (often 3000 locally); 3020 is the documented default.
+        target: process.env.VITE_API_PROXY ?? 'http://localhost:3000',
         changeOrigin: true,
       },
     },

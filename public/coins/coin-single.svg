@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="180" viewBox="0 0 240 180" fill="none" role="img" aria-labelledby="title"><title id="title">A single Liblo book coin</title><defs><g id="coin">
+  <defs>
+    <clipPath id="lc-rim"><circle cx="256" cy="256" r="207"/></clipPath>
+    <path id="lc-book" d="M256 199C228 179 192 170 153 174C145 175 141 180 141 187V317C141 324 146 329 154 328C193 325 225 335 250 351Q256 355 262 351C287 335 319 325 358 328C366 329 371 324 371 317V187C371 180 367 175 359 174C320 170 284 179 256 199Z"/>
+  </defs>
+  <!-- Flat, warm gold with a restrained faceted rim. -->
+  <circle cx="256" cy="260" r="214" fill="#C9851C"/>
+  <circle cx="256" cy="256" r="214" fill="#FFE077"/>
+  <circle cx="256" cy="256" r="207" fill="#F7BE35"/>
+  <g clip-path="url(#lc-rim)">
+    <path d="M272 39H367L75 439L35 352Z" fill="#FFD651"/>
+    <path d="M440 124L483 192L285 479H203Z" fill="#FFD651"/>
+  </g>
+  <circle cx="256" cy="254" r="171" fill="#BC771A"/>
+  <circle cx="256" cy="262" r="166" fill="#EAA02A"/>
+  <path d="M119 357A166 166 0 0 0 393 357" stroke="#F6BC3F" stroke-width="5" stroke-linecap="round"/>
+  <!-- A clear embossed book; the center stays legible at icon sizes. -->
+  <use href="#lc-book" fill="#BB791C" transform="translate(0 9)"/>
+  <use href="#lc-book" fill="#FFDF69"/>
+  <path d="M256 199C284 179 320 170 359 174C367 175 371 180 371 187V317C371 324 366 329 358 328C319 325 287 335 262 351Q259 353 256 353Z" fill="#F8CC4A"/>
+  <path d="M256 209V328" stroke="#C58A22" stroke-width="9" stroke-linecap="round"/>
+  <g stroke="#D5A132" stroke-width="9" stroke-linecap="round">
+    <path d="M170 221Q201 222 229 236"/>
+    <path d="M170 259Q201 260 229 274"/>
+    <path d="M283 236Q311 222 342 221"/>
+    <path d="M283 274Q311 260 342 259"/>
+  </g>
+</g></defs><use href="#coin" transform="translate(59 27) scale(0.24)"/></svg>

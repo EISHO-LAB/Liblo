@@ -1,0 +1,241 @@
+.coin-pay {
+  padding-top: 92px;
+  min-height: 100vh;
+  color: #fff;
+  background:
+    radial-gradient(ellipse 80% 50% at 10% -10%, rgba(0, 113, 235, 0.22), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 90% 0%, rgba(255, 98, 120, 0.12), transparent 50%),
+    #111;
+}
+
+.coin-pay-shell {
+  max-width: 960px;
+  margin: auto;
+  padding: 0 24px 64px;
+}
+
+.coin-pay-status {
+  padding: 80px 0;
+  text-align: center;
+  color: #a1a1a1;
+}
+
+.coin-pay-intro {
+  padding: 28px 0 32px;
+}
+
+.coin-pay-intro h1 {
+  margin: 12px 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.coin-pay-intro p {
+  max-width: 540px;
+  color: #a1a1a1;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.coin-pay-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.coin-pay-panel,
+.coin-pay-summary,
+.coin-pay-error-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(26, 26, 26, 0.92);
+  border-radius: 18px;
+  padding: 24px;
+}
+
+.coin-pay-panel h2 {
+  margin: 0 0 18px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.coin-pay-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.coin-pay-wallets {
+  min-height: 0;
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+}
+
+.coin-pay-wallets.is-visible {
+  opacity: 1;
+}
+
+.coin-pay-wallets-label {
+  margin: 0 0 10px;
+  color: #8f8f8f;
+  font-size: 12px;
+}
+
+.coin-pay-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0 2px;
+  color: #737373;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.coin-pay-divider::before,
+.coin-pay-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.coin-pay-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.coin-pay-field > span {
+  color: #a1a1a1;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.coin-pay-field input {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #141414;
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+
+.coin-pay-field input:focus {
+  outline: none;
+  border-color: #0071eb;
+  box-shadow: 0 0 0 3px rgba(0, 113, 235, 0.25);
+}
+
+.coin-pay-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.coin-pay-summary .coin-eyebrow {
+  margin-bottom: 8px;
+}
+
+.coin-pay-summary h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.coin-pay-summary > img {
+  display: block;
+  width: 160px;
+  height: auto;
+  margin: 0 auto 18px;
+}
+
+.coin-pay-summary dl {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.coin-pay-summary dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #a1a1a1;
+  font-size: 13px;
+}
+
+.coin-pay-summary dd {
+  margin: 0;
+  color: #fff;
+  font-weight: 700;
+}
+
+.coin-pay-summary-total dd {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.coin-pay-summary-total dd img {
+  width: 16px;
+  height: 16px;
+}
+
+.coin-pay-summary-price {
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 15px !important;
+}
+
+.coin-pay-summary-price dd {
+  font-size: 18px;
+  color: #ff6278;
+}
+
+.coin-pay-lock {
+  display: flex;
+  gap: 8px;
+  margin: 18px 0 0;
+  color: #8f8f8f;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.coin-pay-error-card {
+  margin-top: 40px;
+  max-width: 420px;
+}
+
+.coin-pay-error-card h1 {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+
+.coin-pay-error-card p {
+  margin: 0 0 18px;
+  color: #a1a1a1;
+}
+
+.coin-pay .coin-primary-button,
+.coin-pay .coin-cancel-button {
+  width: 100%;
+}
+
+@media (max-width: 820px) {
+  .coin-pay-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .coin-pay-summary {
+    order: -1;
+  }
+}

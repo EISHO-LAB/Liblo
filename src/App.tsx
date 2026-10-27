@@ -7,6 +7,8 @@ import { AuthProvider } from '@/lib/auth'
 import { AccountPage } from '@/pages/account-page'
 import { BrowsePage } from '@/pages/browse-page'
 import { ComicPage } from '@/pages/comic'
+import { CoinsPage } from '@/pages/coins-page'
+import { CoinsPayPage } from '@/pages/coins-pay-page'
 import { HelpPage } from '@/pages/help-page'
 import { HomePage } from '@/pages/home-page'
 import { LoginPage } from '@/pages/login-page'
@@ -66,12 +68,8 @@ function AppShell() {
               <BrowsePage title="E-books" categoryId="ebook" description="Long-form reading" />
             }
           />
-          <Route
-            path="/coins"
-            element={
-              <BrowsePage title="Buy coins" description="Top up to unlock episodes" />
-            }
-          />
+          <Route path="/coins" element={<CoinsPage />} />
+          <Route path="/coins/pay" element={<CoinsPayPage />} />
           <Route
             path="/new"
             element={
