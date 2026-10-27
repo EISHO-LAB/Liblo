@@ -16,7 +16,7 @@ export function TodayUpdates() {
     const offset = Math.max(0, days.findIndex((x) => x.key === day))
     const pool = [...catalog.slice(offset), ...catalog.slice(0, offset)].filter((t) => t.isUp)
     const fallback = [...catalog.slice(offset), ...catalog.slice(0, offset)]
-    return (pool.length ? pool : fallback).slice(0, 12)
+    return (pool.length ? pool : fallback).slice(0, 14)
   }, [day])
 
   return (
@@ -48,7 +48,7 @@ export function TodayUpdates() {
           ))}
         </div>
 
-        <div className="relative grid grid-cols-3 gap-x-3 gap-y-6 pt-2.5 sm:grid-cols-4 sm:gap-x-4 sm:gap-y-7 md:grid-cols-5 lg:grid-cols-6 lg:gap-x-5 lg:gap-y-8">
+        <div className="relative grid grid-cols-3 gap-x-2.5 gap-y-5 pt-2.5 sm:grid-cols-4 sm:gap-x-3 sm:gap-y-6 md:grid-cols-5 lg:grid-cols-7 lg:gap-x-3.5 lg:gap-y-7">
           {items.map((t) => (
             <Link key={`${day}-${t.id}`} to={comicTitleHref(t)} className="min-w-0">
               <div className="@container/cover relative isolate overflow-visible">
@@ -62,9 +62,9 @@ export function TodayUpdates() {
                 </div>
                 <CoverChartBadge title={t} />
               </div>
-              <div className="mt-2.5 space-y-0.5">
-                <ComicTitleLine title={t} className="text-[12px] sm:text-[13px]" />
-                <ComicCardMeta title={t} />
+              <div className="mt-2 space-y-0.5">
+                <ComicTitleLine title={t} className="text-[11px] sm:text-[12px]" />
+                <ComicCardMeta title={t} className="text-[10px]" />
               </div>
             </Link>
           ))}
