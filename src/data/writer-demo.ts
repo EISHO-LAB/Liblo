@@ -14,6 +14,11 @@ export type WriterSeries = {
   updatedAt: string
   /** Optional reader deep-link for open-source demos */
   readHref?: string
+  subtitle?: string
+  synopsis?: string
+  /** Demo analytics shown in writer studio hero */
+  views?: number
+  likes?: number
 }
 
 export type WriterEpisode = {
@@ -28,8 +33,8 @@ export type WriterEpisode = {
   readHref?: string
 }
 
-const SERIES_KEY = 'liblo.writer.series.v4'
-const EPISODES_KEY = 'liblo.writer.episodes.v4'
+const SERIES_KEY = 'liblo.writer.series.v5'
+const EPISODES_KEY = 'liblo.writer.episodes.v5'
 
 const pepper = openSourceTitles[0]!
 
@@ -42,7 +47,10 @@ const DEFAULT_SERIES: WriterSeries[] = [
     cover: pepper.coverPortrait,
     episodeCount: pepper.episodes.length,
     updatedAt: new Date().toISOString(),
-    readHref: `/title/${pepper.slug}`,
+    subtitle: pepper.subtitle,
+    synopsis: pepper.synopsis,
+    views: 3_120_000,
+    likes: 184_200,
   },
   {
     id: 'ws-midnight',
@@ -52,6 +60,11 @@ const DEFAULT_SERIES: WriterSeries[] = [
     cover: '/m1/portrait/p01.webp',
     episodeCount: 2,
     updatedAt: new Date().toISOString(),
+    subtitle: 'Late trains and unfinished goodbyes',
+    synopsis:
+      'A night-shift conductor finds letters that should never have been left on Platform 7.',
+    views: 248_000,
+    likes: 19_400,
   },
   {
     id: 'ws-paper',
@@ -61,6 +74,10 @@ const DEFAULT_SERIES: WriterSeries[] = [
     cover: '/m1/portrait/p03.webp',
     episodeCount: 0,
     updatedAt: new Date().toISOString(),
+    subtitle: 'Letters that rewrite a year',
+    synopsis: 'Draft series — polish the cover, then upload your first episode.',
+    views: 0,
+    likes: 0,
   },
 ]
 
@@ -74,7 +91,6 @@ const DEFAULT_EPISODES: WriterEpisode[] = [
     uploadMode: 'cuts' as const,
     panelCount: ep.panels.length,
     updatedAt: new Date().toISOString(),
-    readHref: `/title/${pepper.slug}/read/${ep.number}`,
   })),
   {
     id: 'we-1',

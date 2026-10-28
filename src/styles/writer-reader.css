@@ -1,0 +1,136 @@
+.writer-reader-page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #fff;
+  padding-top: 72px;
+}
+
+.writer-reader-bar {
+  position: sticky;
+  top: 64px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  background: rgba(17, 17, 17, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.writer-reader-bar a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #ff6278;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.writer-reader-bar a:hover {
+  color: #fff;
+}
+
+.writer-reader-bar strong {
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.writer-reader-badge {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.writer-reader-strip {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 0 24px;
+}
+
+.writer-reader-strip > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #111;
+}
+
+.writer-reader-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 420px;
+  margin: 64px auto;
+  padding: 0 20px;
+  text-align: center;
+  color: #888;
+}
+
+.writer-reader-empty h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.writer-reader-empty p {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.writer-reader-end {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 28px 20px 72px;
+  text-align: center;
+  color: #a1a1a1;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.writer-reader-nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.writer-reader-nav a {
+  color: #ff6278;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.writer-reader-nav a:hover {
+  color: #fff;
+}
+
+.writer-reader-nav a:last-child {
+  justify-self: end;
+}
+
+.writer-reader-nav > a:nth-child(2),
+.writer-reader-nav > span:nth-child(2) {
+  justify-self: center;
+}
+
+@media (max-width: 720px) {
+  .writer-reader-bar {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .writer-reader-badge {
+    width: 100%;
+    text-align: center;
+  }
+}

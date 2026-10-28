@@ -15,8 +15,7 @@ import { LoginPage } from '@/pages/login-page'
 import { MyListPage } from '@/pages/my-list-page'
 import { SignupPage } from '@/pages/signup-page'
 import { VerifyOtpPage } from '@/pages/verify-otp-page'
-import { TitleCoverPage } from '@/pages/title/title-cover-page'
-import { TitleReaderPage } from '@/pages/title/title-reader-page'
+import { WriterEpisodePage } from '@/pages/writer/writer-episode-page'
 import { WriterSeriesPage } from '@/pages/writer/writer-series-page'
 import { WriterStudioPage } from '@/pages/writer/writer-studio-page'
 import { WriterUploadPage } from '@/pages/writer/writer-upload-page'
@@ -86,10 +85,9 @@ function AppShell() {
             path="/writer/series/:seriesId/upload"
             element={<WriterUploadPage />}
           />
-          <Route path="/title/:slug" element={<TitleCoverPage />} />
           <Route
-            path="/title/:slug/read/:episodeNumber"
-            element={<TitleReaderPage />}
+            path="/writer/series/:seriesId/episodes/:episodeId"
+            element={<WriterEpisodePage />}
           />
         </Route>
 

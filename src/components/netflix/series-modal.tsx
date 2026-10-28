@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { Icon } from '@/components/icons/icon'
 import type { SeriesCard } from '@/data/catalog'
 
@@ -42,24 +41,13 @@ export function SeriesModal({ series, onClose }: Props) {
                   {series.title}
                 </h2>
                 <div className="flex items-center gap-4">
-                  {series.slug === 'pepper-and-carrot' ? (
-                    <Link
-                      to="/title/pepper-and-carrot/read/1"
-                      onClick={onClose}
-                      className="flex min-w-[100px] cursor-pointer items-center justify-center rounded bg-white px-8 py-2 font-semibold text-black transition hover:bg-white/80"
-                    >
-                      <Icon icon="lucide:play" width={20} height={20} className="mr-2" />
-                      Play
-                    </Link>
-                  ) : (
-                    <button
-                      type="button"
-                      className="flex min-w-[100px] cursor-pointer items-center justify-center rounded bg-white px-8 py-2 font-semibold text-black transition hover:bg-white/80"
-                    >
-                      <Icon icon="lucide:play" width={20} height={20} className="mr-2" />
-                      Play
-                    </button>
-                  )}
+                  <button
+                    type="button"
+                    className="flex min-w-[100px] cursor-pointer items-center justify-center rounded bg-white px-8 py-2 font-semibold text-black transition hover:bg-white/80"
+                  >
+                    <Icon icon="lucide:play" width={20} height={20} className="mr-2" />
+                    Play
+                  </button>
                 </div>
               </div>
             </div>

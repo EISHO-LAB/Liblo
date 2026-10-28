@@ -227,7 +227,7 @@ const withIds: ComicTitle[] = titles.map((t, i) => {
     return {
       ...base,
       cover: "/opensource/pepper-carrot/cover-portrait-600x800.jpg",
-      href: "/title/pepper-and-carrot",
+      href: "/comic",
       isUp: true,
       isOriginal: true,
       isHot: true,
